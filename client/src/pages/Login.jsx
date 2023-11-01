@@ -1,11 +1,15 @@
+import { useState } from "react";
 import LoginRegister from "../components/LoginRegister";
+import Notification from "../components/Notification";
 import Navbar from "../components/navbar";
 
 function Login() {
+  const [logNotification, setLogNotification] = useState(false);
   return (
     <div>
       <Navbar />
-      <LoginRegister />
+      <LoginRegister setLogNotification={setLogNotification} />
+      <Notification logNotification={logNotification} />
     </div>
   );
 }

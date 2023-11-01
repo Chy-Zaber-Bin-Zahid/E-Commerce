@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 
-function LoginRegister() {
+function LoginRegister({ setRegNotification, setLogNotification }) {
   const location = useLocation();
 
   const [name, setName] = useState("");
@@ -50,6 +50,7 @@ function LoginRegister() {
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Register
     if (location.pathname === "/register") {
       try {
         const result = await axios.post(
@@ -57,7 +58,11 @@ function LoginRegister() {
           { name, email, password, telephone }
         );
         // console.log(result.data);
-        navigate("/login");
+        setRegNotification(true);
+
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000); // 2000 milliseconds (1 second)
       } catch (err) {
         // User existing check by email
         if (err.response) {
@@ -72,13 +77,20 @@ function LoginRegister() {
           }
         }
       }
-    } else {
+    }
+    // Login
+    else {
       try {
         const result = await axios.post(
           "http://localhost:3001/api/user/login",
           { email, password }
         );
-        navigate("/");
+
+        setLogNotification(true);
+
+        setTimeout(() => {
+          navigate("/");
+        }, 2000); // 2000 milliseconds (1 second)
       } catch (err) {
         const errorMessage = err.response.data.error;
         if (errorMessage === "User with this email does not exists") {
@@ -90,7 +102,12 @@ function LoginRegister() {
 
   return (
     <div className="flex justify-center items-center">
-      <form onSubmit={handleSubmit} className={`mx-auto ${location.pathname =="/register" ? "py-2": "py-10"}`}>
+      <form
+        onSubmit={handleSubmit}
+        className={`mx-auto ${
+          location.pathname == "/register" ? "py-2" : "py-10"
+        }`}
+      >
         <div className="w-96 ">
           <h1 className="font-bold text-2xl">
             {location.pathname !== "/register"
