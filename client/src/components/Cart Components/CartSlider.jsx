@@ -7,7 +7,7 @@ function CartSlider({ cartSlider, handelCartSlider }) {
         cartSlider === false
           ? "w-0 overflow-x-hidden overflow-y-hidden"
           : "w-96 overflow-x-hidden overflow-y-hidden"
-      } absolute shadow-xl top-0 h-screen right-0 bg-white duration-300`}
+      } fixed shadow-xl shadow-gray-500 top-0 h-screen right-0 bg-white duration-300`}
     >
       <div className="flex justify-between items-center bg-sky-950 px-4 py-3">
         <h1 className="text-white text-lg font-bold">Your Cart</h1>

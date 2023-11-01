@@ -104,9 +104,7 @@ function LoginRegister({ setRegNotification, setLogNotification }) {
     <div className="flex justify-center items-center">
       <form
         onSubmit={handleSubmit}
-        className={`mx-auto ${
-          location.pathname == "/register" ? "py-2" : "py-10"
-        }`}
+        className="mx-auto py-10"
       >
         <div className="w-96 ">
           <h1 className="font-bold text-2xl">
@@ -226,7 +224,7 @@ function LoginRegister({ setRegNotification, setLogNotification }) {
           ) : (
             <p className="mt-2 ">
               If you already have an account with us, please login at the{" "}
-              <Link to="/login" className="text-red-600">
+              <Link to="/login" className="text-red-600 hover:underline">
                 login page
               </Link>
               .

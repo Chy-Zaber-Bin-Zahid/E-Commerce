@@ -3,8 +3,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Homepage from "./pages/Homepage";
 import PageNotFound from "./pages/PageNotFound";
-import Cart from "./components/Cart/Cart";
-import CartSlider from "./components/Cart/CartSlider";
+import Cart from "./components/Cart Components/Cart";
+import CartSlider from "./components/Cart Components/CartSlider";
 import { useState } from "react";
 
 function App() {

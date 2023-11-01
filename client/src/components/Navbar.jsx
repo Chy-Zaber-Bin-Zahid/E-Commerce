@@ -2,7 +2,6 @@ import { NavLink, useLocation } from "react-router-dom";
 
 function Navbar() {
   const location = useLocation();
-  console.log(location);
   return (
     <div className=" px-4 py-3 bg-sky-950 ">
       <div className="flex justify-between items-center max-w-screen-xl mx-auto">
