@@ -5,7 +5,7 @@ import Navbar from "../components/navbar";
 
 function Homepage() {
   return (
-    <div className="bg-gray-100 h-screen ">
+    <div className="bg-gray-100">
       <Navbar />
       <h1 className="text-center text-2xl py-1 font-semibold">
         Featured Products

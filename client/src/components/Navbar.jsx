@@ -1,13 +1,18 @@
 import { NavLink, useLocation } from "react-router-dom";
+import Dropdown from "./Dropdown";
 
 function Navbar() {
   const location = useLocation();
   return (
     <div className=" px-4 py-3 bg-sky-950 ">
       <div className="flex justify-between items-center max-w-screen-xl mx-auto">
-        <NavLink to="/" className="text-3xl text-white italic cursor-pointer">
-          Smart Tech
-        </NavLink>
+        <div className="flex gap-4 justify-center items-center">
+          <NavLink to="/" className="text-3xl text-white italic cursor-pointer">
+            Smart Tech
+          </NavLink>
+          <Dropdown />
+        </div>
+
         <ul className="flex justify-center items-center gap-5 text-xl text-white ">
           {location.pathname !== "/login" && (
             <li className="navbar-log-reg">
