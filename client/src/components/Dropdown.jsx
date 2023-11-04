@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-function Dropdown() {
+function Dropdown({ search }) {
   const [dropdown, setDropdown] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [storeValue, setStoreValue] = useState("");
@@ -50,18 +50,20 @@ function Dropdown() {
   }, [storeValue]);
 
   return (
-    <div className="relative">
+    <div className={`relative `}>
       <input
-        className="py-2 px-5 w-96 rounded focus:outline-none bg-white"
+        className={`py-2 px-5 w-96 rounded focus:outline-none bg-white ${
+          search && "w-full rounded-none py-4"
+        }`}
         placeholder="Search"
         type="text"
         list="options"
         onChange={(e) => handleDropdown(e)}
       />
       <div
-        className={`bg-white absolute w-96 top-9 px-3 py-2 border-t ${
-          dropdown === false ? "hidden" : "block"
-        }`}
+        className={`bg-white absolute w-96 ${
+          search ? "w-full top-14" : "top-9"
+        }  px-3 py-2 border-t ${dropdown === false ? "hidden" : "block"}`}
       >
         {inputValue.length !== 0 ? (
           inputValue.map((product) => (

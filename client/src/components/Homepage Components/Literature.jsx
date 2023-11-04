@@ -1,7 +1,7 @@
 function Literature() {
   return (
-    <div className="flex justify-between items-left max-w-screen-xl mx-auto flex-col gap-4 py-8">
-      <h1 className="text-2xl font-semibold">
+    <div className="flex justify-between items-left max-w-screen-xl mx-auto flex-col gap-4 py-8 max-[1320px]:w-11/12">
+      <h1 className="text-2xl font-semibold max-[500px]:text-xl">
         Leading Computer, Laptop & Gaming PC Retail & Online Shop in Bangladesh
       </h1>
       <p>
@@ -21,7 +21,7 @@ function Literature() {
         sorts of regulatory requirements to provide customers with products and
         services of a global standard.
       </p>
-      <h1 className="text-xl font-semibold pt-4">
+      <h1 className="text-xl font-semibold pt-4 max-[500px]:text-lg">
         Best Laptop Shop in Bangladesh
       </h1>
       <p>
@@ -43,7 +43,7 @@ function Literature() {
         Xiaomi MI, Huawei, Chuwi, etc.
       </p>
 
-      <h1 className="text-xl font-semibold pt-4">
+      <h1 className="text-xl font-semibold pt-4 max-[500px]:text-lg">
         Best Desktop PC Shop In Bangladesh
       </h1>
       <p>

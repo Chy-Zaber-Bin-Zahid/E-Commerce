@@ -28,8 +28,8 @@ function FeatureProduct() {
   return (
     <>
       {featureProduct.length !== 0 ? (
-        <div className="flex justify-between items-center max-w-screen-xl mx-auto">
-          <div className="grid grid-cols-5 gap-4 w-full my-4">
+        <div className="flex justify-between items-center max-w-screen-xl mx-auto max-[1320px]:w-11/12">
+          <div className="grid grid-cols-5 gap-4 w-full my-4 max-[1045px]:grid-cols-4 max-[910px]:grid-cols-3 max-[650px]:grid-cols-2 max-[500px]:grid-cols-1">
             {featureProduct.length !== 0 &&
               featureProduct.map((product) => (
                 <div
@@ -42,8 +42,8 @@ function FeatureProduct() {
                     alt={product.title}
                   />
                   <div className="flex flex-col justify-between flex-grow">
-                    <p>{product.title}</p>
-                    <b className="text-red-600">{product.price}Tk</b>
+                    <p className="max-[1200px]:text-sm max-[500px]:text-base">{product.title}</p>
+                    <b className="text-red-600 max-[500px]:text-lg">{product.price}Tk</b>
                   </div>
                 </div>
               ))}
