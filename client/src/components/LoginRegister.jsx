@@ -11,11 +11,13 @@ function LoginRegister({ setRegNotification, setLogNotification }) {
   const [telephone, setTelephone] = useState("");
   const [showMessage, setShowMessage] = useState(false);
   const [exist, setExist] = useState(false);
+  const [passCheck, setPassCheck] = useState(false);
   const [telLength, setTelLength] = useState(false);
 
   // Length check
   const handleInputChange = (event, setFunc, length = 0) => {
     setExist(false);
+    setPassCheck(false);
     const inputValue = event.target.value;
     console.log(inputValue);
     if (length !== 0) {
@@ -95,6 +97,8 @@ function LoginRegister({ setRegNotification, setLogNotification }) {
         const errorMessage = err.response.data.error;
         if (errorMessage === "User with this email does not exists") {
           setExist(true);
+        } else if (errorMessage === "Wrong password") {
+          setPassCheck(true);
         }
       }
     }
@@ -102,10 +106,7 @@ function LoginRegister({ setRegNotification, setLogNotification }) {
 
   return (
     <div className="flex justify-center items-center">
-      <form
-        onSubmit={handleSubmit}
-        className="mx-auto py-10"
-      >
+      <form onSubmit={handleSubmit} className="mx-auto py-10">
         <div className="w-96 ">
           <h1 className="font-bold text-2xl">
             {location.pathname !== "/register"
@@ -164,7 +165,9 @@ function LoginRegister({ setRegNotification, setLogNotification }) {
             </label>
             <input
               required
-              className="mt-1 border-2 p-2 rounded placeholder-gray-500 "
+              className={`mt-1 border-2 p-2 rounded placeholder-gray-500 ${
+                passCheck !== false && "border-red-600"
+              }`}
               type="password"
               placeholder="Password"
               value={password}
@@ -172,7 +175,12 @@ function LoginRegister({ setRegNotification, setLogNotification }) {
             />
             {password.length > 0 && (
               <p className="text-red-600 text-sm mt-1">
-                Max length is 40 characters!
+                {location.pathname === "/register" &&
+                  "Max length is 40 characters!"}
+                {location.pathname === "/login" &&
+                  (passCheck === false
+                    ? "Max length is 40 characters!"
+                    : "Wrong password!")}
               </p>
             )}
           </div>

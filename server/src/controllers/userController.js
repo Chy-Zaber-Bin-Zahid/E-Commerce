@@ -1,4 +1,5 @@
 const createError = require("http-errors");
+const bcrypt = require('bcrypt');
 const User = require("../models/userModel");
 const { successResponse } = require("./responseController");
 const mongoose = require("mongoose");
@@ -53,16 +54,26 @@ const regUser = async (req, res, next) => {
 const logUser = async (req, res, next) => {
   try {
     const existingUser = await User.findOne({ email: req.body.email });
+    const enteredPassword = req.body.password;
     const arr = [];
     // Checking user existence by email
     if (!existingUser) {
       arr.push("email");
     }
-
+    
     // Sending error message to client (front-end)
     if (arr.length === 1) {
       return res.status(400).json({
         error: "User with this email does not exists",
+      });
+    }
+
+    const isPasswordValid = await bcrypt.compare(enteredPassword, existingUser.password);
+
+    // Password checking
+    if (!isPasswordValid) {
+      return res.status(400).json({
+        error: "Wrong password",
       });
     }
 
