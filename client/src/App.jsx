@@ -6,9 +6,12 @@ import PageNotFound from "./pages/PageNotFound";
 import Cart from "./components/Cart Components/Cart";
 import CartSlider from "./components/Cart Components/CartSlider";
 import { useState } from "react";
+import Profile from "./pages/Profile";
 
 function App() {
   const [cartSlider, setCartSlider] = useState(false);
+  const [logged, setLogged] = useState(false);
+  const [accountId, setAccountId] = useState("");
 
   const handelCartSlider = () => {
     setCartSlider(!cartSlider);
@@ -18,9 +21,38 @@ function App() {
     <div className="relative h-screen ">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="login" element={<Login />} />
+          <Route
+            path="/"
+            element={
+              <Homepage
+                setLogged={setLogged}
+                logged={logged}
+                accountId={accountId}
+                setAccountId={setAccountId}
+              />
+            }
+          />
+          <Route
+            path="login"
+            element={
+              <Login
+                setLogged={setLogged}
+                logged={logged}
+                setAccountId={setAccountId}
+              />
+            }
+          />
           <Route path="register" element={<Register />} />
+          <Route
+            path="profile/:userId"
+            element={
+              <Profile
+                setLogged={setLogged}
+                logged={logged}
+              
+              />
+            }
+          />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>

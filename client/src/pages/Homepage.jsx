@@ -3,14 +3,21 @@ import FeatureProduct from "../components/Homepage Components/FeatureProduct";
 import Literature from "../components/Homepage Components/Literature";
 import Navbar from "../components/navbar";
 
-function Homepage() {
+function Homepage({ logged, setLogged, accountId, setAccountId }) {
   return (
     <div className="bg-gray-100 ">
-      <Navbar />
+      <Navbar
+        setLogged={setLogged}
+        logged={logged}
+        accountId={accountId}
+        setAccountId={setAccountId}
+      />
       <h1 className="text-center text-2xl py-1 font-semibold max-[800px]:text-xl">
         Featured Products
       </h1>
-      <p className="text-center max-[800px]:text-sm ">Check & Get Your Desired Product!</p>
+      <p className="text-center max-[800px]:text-sm ">
+        Check & Get Your Desired Product!
+      </p>
       <FeatureProduct />
       <Literature />
       <Footer />

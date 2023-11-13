@@ -2,7 +2,12 @@ import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 
-function LoginRegister({ setRegNotification, setLogNotification }) {
+function LoginRegister({
+  setRegNotification,
+  setLogNotification,
+  setLogged,
+  setAccountId,
+}) {
   const location = useLocation();
 
   const [name, setName] = useState("");
@@ -19,7 +24,6 @@ function LoginRegister({ setRegNotification, setLogNotification }) {
     setExist(false);
     setPassCheck(false);
     const inputValue = event.target.value;
-    console.log(inputValue);
     if (length !== 0) {
       // Limit the character count to 30/40(length)
       if (inputValue.length <= length) {
@@ -64,7 +68,7 @@ function LoginRegister({ setRegNotification, setLogNotification }) {
 
         setTimeout(() => {
           navigate("/login");
-        }, 2000); // 2000 milliseconds (1 second)
+        }, 2000); // 2000 milliseconds (2 second)
       } catch (err) {
         // User existing check by email
         if (err.response) {
@@ -80,6 +84,7 @@ function LoginRegister({ setRegNotification, setLogNotification }) {
         }
       }
     }
+
     // Login
     else {
       try {
@@ -89,10 +94,11 @@ function LoginRegister({ setRegNotification, setLogNotification }) {
         );
 
         setLogNotification(true);
-
+        setAccountId(result.data.payload.user._id);
         setTimeout(() => {
-          navigate("/");
-        }, 2000); // 2000 milliseconds (1 second)
+          navigate(`/profile/${result.data.payload.user._id}`);
+          setLogged(true);
+        }, 2000); // 2000 milliseconds (2 second)
       } catch (err) {
         const errorMessage = err.response.data.error;
         if (errorMessage === "User with this email does not exists") {

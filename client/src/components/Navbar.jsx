@@ -1,9 +1,11 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useParams } from "react-router-dom";
 import Dropdown from "./Dropdown";
 import { useState } from "react";
 
-function Navbar() {
+function Navbar({ setLogged, logged, accountId, setAccountId }) {
+  let { userId } = useParams();
   const location = useLocation();
+  if (!userId) userId = accountId;
   const [navBarOpen, setNavBarOpen] = useState(false);
   const [search, setSearch] = useState(false);
 
@@ -15,6 +17,11 @@ function Navbar() {
   const handelSearch = () => {
     setSearch(!search);
     setNavBarOpen(false);
+  };
+
+  // Logout handle
+  const handleLogged = () => {
+    setLogged(false);
   };
 
   const windowSize = 1000;
@@ -54,14 +61,50 @@ function Navbar() {
             </>
           ) : (
             <>
-              {location.pathname !== "/login" && (
-                <li className="navbar-log-reg">
-                  <NavLink to="/login">Login</NavLink>
-                </li>
+              {!logged ? (
+                <>
+                  {location.pathname === "/" && (
+                    <>
+                      <li className="navbar-log-reg">
+                        <NavLink to="/login">Login</NavLink>
+                      </li>
+                      <li className="navbar-log-reg">
+                        <NavLink to="/register">Register</NavLink>
+                      </li>
+                    </>
+                  )}
+                  {location.pathname === "/register" && (
+                    <li className="navbar-log-reg">
+                      <NavLink to="/login">Login</NavLink>
+                    </li>
+                  )}
+                  {location.pathname === "/login" && (
+                    <li className="navbar-log-reg">
+                      <NavLink to="/register">Register</NavLink>
+                    </li>
+                  )}
+                </>
+              ) : (
+                <>
+                  {location.pathname !== `/profile/${userId}` && (
+                    <>
+                      <li className="navbar-log-reg">
+                        <NavLink to={`/profile/${userId}`}>Dashboard</NavLink>
+                      </li>
+                      <li className="navbar-log-reg">
+                        <NavLink onClick={handleLogged} to="/login">
+                          Logout
+                        </NavLink>
+                      </li>
+                    </>
+                  )}
+                </>
               )}
-              {location.pathname !== "/register" && (
+              {location.pathname === `/profile/${userId}` && (
                 <li className="navbar-log-reg">
-                  <NavLink to="/register">Register</NavLink>
+                  <NavLink onClick={handleLogged} to="/login">
+                    Logout
+                  </NavLink>
                 </li>
               )}
             </>
