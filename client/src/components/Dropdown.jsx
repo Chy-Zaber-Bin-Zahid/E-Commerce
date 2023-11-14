@@ -69,7 +69,7 @@ function Dropdown({ search }) {
           inputValue.map((product) => (
             <Link
               key={product._id}
-              to="/login"
+              to={`/product/${product._id}`}
               className=" bg-slate-50 px-2 flex gap-2 py-2 hover:bg-slate-200"
             >
               <img
@@ -85,6 +85,8 @@ function Dropdown({ search }) {
               </div>
             </Link>
           ))
+        ) : !Array.isArray(inputValue) ? (
+          <h1>Loading...</h1>
         ) : (
           <p>No product found!</p>
         )}

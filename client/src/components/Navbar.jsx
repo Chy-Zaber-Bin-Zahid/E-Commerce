@@ -2,13 +2,16 @@ import { NavLink, useLocation, useParams } from "react-router-dom";
 import Dropdown from "./Dropdown";
 import { useState } from "react";
 
-function Navbar({ setLogged, logged, accountId, setAccountId }) {
+function Navbar({ setLogged, logged, accountId }) {
   let { userId } = useParams();
   const location = useLocation();
-  if (!userId) userId = accountId;
+  if (!userId) {
+    userId = accountId;
+  } else if (logged && !location.pathname.includes("profile")) {
+    userId = accountId;
+  }
   const [navBarOpen, setNavBarOpen] = useState(false);
   const [search, setSearch] = useState(false);
-
   const handelNavBar = () => {
     setNavBarOpen(!navBarOpen);
     setSearch(false);
@@ -73,6 +76,7 @@ function Navbar({ setLogged, logged, accountId, setAccountId }) {
                       </li>
                     </>
                   )}
+
                   {location.pathname === "/register" && (
                     <li className="navbar-log-reg">
                       <NavLink to="/login">Login</NavLink>
@@ -82,6 +86,16 @@ function Navbar({ setLogged, logged, accountId, setAccountId }) {
                     <li className="navbar-log-reg">
                       <NavLink to="/register">Register</NavLink>
                     </li>
+                  )}
+                  {location.pathname === `/product/${userId}` && (
+                    <>
+                      <li className="navbar-log-reg">
+                        <NavLink to="/login">Login</NavLink>
+                      </li>
+                      <li className="navbar-log-reg">
+                        <NavLink to="/register">Register</NavLink>
+                      </li>
+                    </>
                   )}
                 </>
               ) : (

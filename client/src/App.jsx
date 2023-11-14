@@ -7,6 +7,7 @@ import Cart from "./components/Cart Components/Cart";
 import CartSlider from "./components/Cart Components/CartSlider";
 import { useState } from "react";
 import Profile from "./pages/Profile";
+import ProductPage from "./pages/ProductPage";
 
 function App() {
   const [cartSlider, setCartSlider] = useState(false);
@@ -45,15 +46,19 @@ function App() {
           <Route path="register" element={<Register />} />
           <Route
             path="profile/:userId"
+            element={<Profile setLogged={setLogged} logged={logged} />}
+          />
+          <Route
+            path="/product/:userId"
             element={
-              <Profile
+              <ProductPage
                 setLogged={setLogged}
                 logged={logged}
-              
+                accountId={accountId}
               />
             }
           />
-          <Route path="*" element={<PageNotFound />} />
+          <Route path="*" element={<PageNotFound logged={logged} />} />
         </Routes>
       </BrowserRouter>
       <Cart handelCartSlider={handelCartSlider} />

@@ -2,9 +2,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ProfileOption from "./ProfileOption";
+import ProfileSlider from "./ProfileSlider";
 
-function ProfileMain({setLogged}) {
+function ProfileMain({ setLogged }) {
   const [userInfo, setUserInfo] = useState({});
+  const [slider, setSlider] = useState(false);
+  const [sliderOpen, setSliderOpen] = useState("");
   const { userId } = useParams();
   useEffect(() => {
     const fetchData = async () => {
@@ -23,7 +26,11 @@ function ProfileMain({setLogged}) {
 
   return (
     <div className="mx-auto max-w-5xl mt-10">
-      <div className="flex gap-6 justify-left items-center mb-10">
+      <div
+        className={`flex gap-6 justify-left items-center ${
+          slider ? "mb-6" : "mb-8"
+        }`}
+      >
         <img
           className="rounded-full w-20"
           src="/images/profile.png"
@@ -38,7 +45,15 @@ function ProfileMain({setLogged}) {
           )}
         </div>
       </div>
-      <ProfileOption setLogged={setLogged} />
+      {slider ? (
+        <ProfileSlider setSliderOpen={setSliderOpen} sliderOpen={sliderOpen} />
+      ) : (
+        <ProfileOption
+          setSlider={setSlider}
+          setSliderOpen={setSliderOpen}
+          setLogged={setLogged}
+        />
+      )}
     </div>
   );
 }
