@@ -73,10 +73,9 @@ function ProfileOption({ setLogged, setSlider, setSliderOpen }) {
   return (
     <div className="grid grid-cols-3 gap-4">
       {list.map((product) => (
-        <div
+        <Link
           onClick={() => handleBoth(product.path, product.id)}
-          // onClick={() => handleLogged(product.path)}
-          // to={`/${product.path}`}
+          to={product.id === 6 ? `/${product.path}` : undefined}
           key={product.id}
           className="flex gap-1 flex-col justify-center items-center border rounded py-16 shadow-md hover:cursor-pointer hover:border-sky-800 transition-all duration-300"
         >
@@ -86,7 +85,7 @@ function ProfileOption({ setLogged, setSlider, setSliderOpen }) {
             alt={`${product.title}`}
           />
           <h1>{`${product.title}`}</h1>
-        </div>
+        </Link>
       ))}
     </div>
   );

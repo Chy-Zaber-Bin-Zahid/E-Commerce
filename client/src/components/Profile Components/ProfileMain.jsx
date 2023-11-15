@@ -46,7 +46,11 @@ function ProfileMain({ setLogged }) {
         </div>
       </div>
       {slider ? (
-        <ProfileSlider setSliderOpen={setSliderOpen} sliderOpen={sliderOpen} />
+        <ProfileSlider
+          setSliderOpen={setSliderOpen}
+          sliderOpen={sliderOpen}
+          setUserInfo={setUserInfo}
+        />
       ) : (
         <ProfileOption
           setSlider={setSlider}
