@@ -5,6 +5,7 @@ function Notification({
   logNotification,
   upNotification,
   setUpNotification,
+  passUpdate,
 }) {
   const location = useLocation();
   const { userId } = useParams();
@@ -23,8 +24,9 @@ function Notification({
       <h1 className="text-white font-semibold text-xl">
         {location.pathname === "/register" && "Registration complete ✔"}
         {location.pathname === "/login" && "Login successful ✔"}
-        {location.pathname === `/profile/${userId}` &&
-          "Profile updated successful ✔"}
+        {location.pathname === `/profile/${userId}` && passUpdate === true
+          ? "Password updated successful ✔"
+          : "Profile updated successful ✔"}
       </h1>
     </div>
   );

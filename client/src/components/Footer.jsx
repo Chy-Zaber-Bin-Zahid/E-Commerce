@@ -62,7 +62,7 @@ function Footer() {
 
       <div className="flex justify-between items-center max-w-screen-xl mx-auto py-4 gap-6">
         <p className="text-gray-400 text-sm max-[500px]:text-xs">
-          © 2023 Smart Tech | All rights reserved
+          {`© ${new Date().getFullYear()} Smart Tech | All rights reserved`}
         </p>
         <p className="text-gray-400 text-sm max-[500px]:text-xs">Powered By: Smart Tech</p>
       </div>

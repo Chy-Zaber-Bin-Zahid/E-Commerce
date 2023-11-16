@@ -3,14 +3,13 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import Notification from "../Notification";
 
-function ProfileEdit({ setUserInfo }) {
+function ProfileEdit({ setUserInfo, upNotification, setUpNotification }) {
   const [exist, setExist] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [showMessage, setShowMessage] = useState(false);
   const [telLength, setTelLength] = useState(false);
   const [telephone, setTelephone] = useState("");
-  const [upNotification, setUpNotification] = useState(false);
   const { userId } = useParams();
 
   // Data send to backend

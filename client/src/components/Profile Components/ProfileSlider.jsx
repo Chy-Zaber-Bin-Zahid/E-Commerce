@@ -1,6 +1,9 @@
+import { useState } from "react";
 import ProfileEdit from "./ProfileEdit";
+import ProfilePassChange from "./ProfilePassChange";
 
 function ProfileSlider({ sliderOpen, setSliderOpen, setUserInfo }) {
+  const [upNotification, setUpNotification] = useState(false);
   const list = [
     {
       id: 1,
@@ -53,7 +56,19 @@ function ProfileSlider({ sliderOpen, setSliderOpen, setUserInfo }) {
           </div>
         ))}
       </div>
-      {sliderOpen === "edit" && <ProfileEdit setUserInfo={setUserInfo} />}
+      {sliderOpen === "edit" && (
+        <ProfileEdit
+          upNotification={upNotification}
+          setUserInfo={setUserInfo}
+          setUpNotification={setUpNotification}
+        />
+      )}
+      {sliderOpen === "change" && (
+        <ProfilePassChange
+          setUpNotification={setUpNotification}
+          upNotification={upNotification}
+        />
+      )}
     </>
   );
 }

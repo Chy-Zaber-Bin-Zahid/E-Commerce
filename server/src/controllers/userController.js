@@ -108,11 +108,12 @@ const getUserById = async (req, res, next) => {
   }
 };
 
-// Login user
+// Change Profile Info User
 const changeUser = async (req, res, next) => {
   try {
     const existingUser = await User.findOne({ _id: req.body.userId });
     const arr = [];
+    console.log(req.body.email);
     const existingEmail = await User.findOne({ email: req.body.email });
     // Checking user existence by email
     if (existingEmail) {
@@ -159,4 +160,50 @@ const changeUser = async (req, res, next) => {
   }
 };
 
-module.exports = { regUser, logUser, getUserById, changeUser };
+// Change Profile Password User
+const changePassUser = async (req, res, next) => {
+  try {
+    const existingUser = await User.findOne({ _id: req.body.userId });
+    const enteredOldPassword = req.body.oldPassword;
+    const enteredNewPassword = req.body.newPassword;
+    const enteredConfirmPassword = req.body.confirmPassword;
+    const isPasswordValid = await bcrypt.compare(
+      enteredOldPassword,
+      existingUser.password
+    );
+    // Password checking
+    console.log(isPasswordValid);
+    if (!isPasswordValid) {
+      return res.status(400).json({
+        error: "Wrong password",
+      });
+    } else if (enteredNewPassword === enteredOldPassword) {
+      return res.status(400).json({
+        error: "Same password",
+      });
+    } else if (enteredNewPassword !== enteredConfirmPassword) {
+      return res.status(400).json({
+        error: "Passwords do not match",
+      });
+    }
+
+    // New hashed password
+    const newHashedPassword = await bcrypt.hash(req.body.newPassword, 10);
+    console.log(existingUser.password);
+    existingUser.password = newHashedPassword;
+    // Save the updated user pass to the database
+    await existingUser.save();
+    console.log(existingUser.password);
+    return successResponse(res, {
+      statusCode: 200,
+      message: "user password updated successfully",
+      payload: {
+        user: existingUser,
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { regUser, logUser, getUserById, changeUser, changePassUser };
