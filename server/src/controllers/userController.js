@@ -172,7 +172,6 @@ const changePassUser = async (req, res, next) => {
       existingUser.password
     );
     // Password checking
-    console.log(isPasswordValid);
     if (!isPasswordValid) {
       return res.status(400).json({
         error: "Wrong password",
@@ -186,14 +185,10 @@ const changePassUser = async (req, res, next) => {
         error: "Passwords do not match",
       });
     }
-
     // New hashed password
-    const newHashedPassword = await bcrypt.hash(req.body.newPassword, 10);
-    console.log(existingUser.password);
-    existingUser.password = newHashedPassword;
+    existingUser.password = enteredNewPassword;
     // Save the updated user pass to the database
     await existingUser.save();
-    console.log(existingUser.password);
     return successResponse(res, {
       statusCode: 200,
       message: "user password updated successfully",
