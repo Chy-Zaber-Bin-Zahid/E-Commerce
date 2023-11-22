@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 function ProfileWishList() {
   const { userId } = useParams();
   const [wishList, setWishList] = useState([]);
+  const [wishEmpty, setWishEmpty] = useState(false);
 
   const handleDeleteWish = async (id) => {
     try {
@@ -14,6 +15,14 @@ function ProfileWishList() {
           userId,
         }
       );
+      const deletedWishListId = result.data.payload.deletedWishListId;
+      const updatedWishList = wishList.filter(
+        (wish) => wish._id !== deletedWishListId
+      );
+      setWishList(updatedWishList);
+      if (updatedWishList.length === 0) {
+        setWishEmpty(true);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -32,6 +41,9 @@ function ProfileWishList() {
         );
         const data = result.data.payload.wishList;
         setWishList(data);
+        if (data.length === 0) {
+          setWishEmpty(true);
+        }
       } catch (err) {
         console.log(err);
       }
@@ -70,8 +82,10 @@ function ProfileWishList() {
             </div>
           </>
         ))
-      ) : (
+      ) : !wishEmpty ? (
         <h1 className="text-xl text-center w-full px-10">Loading...</h1>
+      ) : (
+        <h1>Your wish list is empty.</h1>
       )}
     </div>
   );
