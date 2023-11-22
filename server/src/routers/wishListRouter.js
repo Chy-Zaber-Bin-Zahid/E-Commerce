@@ -1,7 +1,13 @@
 const express = require("express");
-const { wishList } = require("../controllers/wishListController");
+const {
+  wishList,
+  wishListAll,
+  wishListDelete,
+} = require("../controllers/wishListController");
 const wishListRouter = express.Router();
 
-wishListRouter.get("/wishList", wishList);
+wishListRouter.post("/wishList/:id", wishList);
+wishListRouter.post("/wishListDelete/:id", wishListDelete);
+wishListRouter.get("/wishList/:id", wishListAll);
 
 module.exports = wishListRouter;

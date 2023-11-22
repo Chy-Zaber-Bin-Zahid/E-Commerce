@@ -2,17 +2,17 @@ const { Schema, model } = require("mongoose");
 
 const wishListSchema = new Schema(
   {
-    email: {
+    userId: {
       type: String,
-      required: [true, "User email is required!"],
+      required: [true, "User id is required!"],
       trim: true,
-      unique: true,
-      validate: {
-        validator: function (v) {
-          return /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/.test(v);
-        },
-        message: "Please enter a valid email!",
-      },
+ 
+    },
+    productId: {
+      type: String,
+      required: [true, "Product id is required!"],
+      trim: true,
+
     },
     image: {
       type: String,
@@ -30,7 +30,7 @@ const wishListSchema = new Schema(
       trim: true,
     },
   },
-  { timestamps: true, collection: "feature-product" }
+  { timestamps: true, collection: "wish-list" }
 );
 
 const WishList = model("WishList", wishListSchema);

@@ -1,0 +1,80 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
+function ProfileWishList() {
+  const { userId } = useParams();
+  const [wishList, setWishList] = useState([]);
+
+  const handleDeleteWish = async (id) => {
+    try {
+      const result = await axios.post(
+        `http://localhost:3001/api/user/wishListDelete/${id}`,
+        {
+          userId,
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    const handleWishList = async () => {
+      try {
+        const result = await axios.get(
+          `http://localhost:3001/api/user/wishList/${userId}`,
+          {
+            params: {
+              fields: ["image", "title", "price"],
+            },
+          }
+        );
+        const data = result.data.payload.wishList;
+        setWishList(data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    handleWishList();
+  }, []);
+
+  return (
+    <div className="flex flex-col gap-4 px-4 py-8">
+      <h1 className="text-2xl text-blue-700">My Wish List</h1>
+      {wishList.length !== 0 ? (
+        wishList.map((wish) => (
+          <>
+            <div className="border flex justify-between items-center px-4 py-2 rounded shadow-sm shadow-gray-300 hover:shadow-gray-500 hover:shadow-md transition-all duration-300">
+              <div
+                className="flex justify-start gap-4 items-center"
+                key={wish._id}
+              >
+                <img
+                  src={`http://localhost:3001/images/products/${wish.image}`}
+                  alt={wish.title}
+                  className="w-16"
+                />
+                <div>
+                  <h1 className="font-semibold">{wish.title}</h1>
+                  <h1 className="text-red-600">{wish.price}Tk</h1>
+                </div>
+              </div>
+              <img
+                onClick={() => handleDeleteWish(wish._id)}
+                className="w-6 cursor-pointer transition-transform transform-gpu hover:scale-125"
+                src="/images/delete.png"
+                alt="Delete"
+              />
+            </div>
+          </>
+        ))
+      ) : (
+        <h1 className="text-xl text-center w-full px-10">Loading...</h1>
+      )}
+    </div>
+  );
+}
+
+export default ProfileWishList;

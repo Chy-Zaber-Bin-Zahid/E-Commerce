@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ProfileEdit from "./ProfileEdit";
 import ProfilePassChange from "./ProfilePassChange";
+import ProfileWishList from "./ProfileWishList";
 
 function ProfileSlider({ sliderOpen, setSliderOpen, setUserInfo }) {
   const [upNotification, setUpNotification] = useState(false);
@@ -69,6 +70,7 @@ function ProfileSlider({ sliderOpen, setSliderOpen, setUserInfo }) {
           upNotification={upNotification}
         />
       )}
+      {sliderOpen === "wish" && <ProfileWishList />}
     </>
   );
 }

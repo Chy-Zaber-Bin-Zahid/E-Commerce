@@ -55,13 +55,13 @@ function ProfileOption({ setLogged, setSlider, setSliderOpen }) {
         setSliderOpen("edit");
       } else if (id === 2) {
         setSliderOpen("change");
+      } else if (id === 3) {
+        setSliderOpen("order");
+      } else if (id === 4) {
+        setSliderOpen("wish");
+      } else {
+        setSliderOpen("payment");
       }
-    } else if (id === 3) {
-      setSliderOpen("order");
-    } else if (id === 4) {
-      setSliderOpen("wish");
-    } else {
-      setSliderOpen("payment");
     }
   };
 

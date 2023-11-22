@@ -6,6 +6,8 @@ function Notification({
   upNotification,
   setUpNotification,
   passUpdate = false,
+  wishListNotification = false,
+  setWishListNotification,
 }) {
   const location = useLocation();
   const { userId } = useParams();
@@ -13,12 +15,19 @@ function Notification({
     setUpNotification(false);
   }, 2000);
 
+  if (wishListNotification) {
+    setTimeout(() => {
+      setWishListNotification(false);
+    }, 2000);
+  }
+
   return (
     <div
-      className={`${
-        upNotification === true ? "translate-x-0" : "-translate-x-96"
-      } ${regNotification === true ? "translate-x-0" : "-translate-x-96"} ${
-        logNotification === true ? "translate-x-0" : "-translate-x-96"
+      className={`
+      ${upNotification === true ? "translate-x-0" : "-translate-x-96"} ${
+        regNotification === true ? "translate-x-0" : "-translate-x-96"
+      } ${logNotification === true ? "translate-x-0" : "-translate-x-96"} ${
+        wishListNotification === true ? "translate-x-0" : "-translate-x-96"
       } fixed bottom-5 left-5 bg-green-500 p-4 rounded cursor-pointer transition-all delay-300 flex justify-center items-center  shadow-md shadow-gray-500`}
     >
       <h1 className="text-white font-semibold text-xl">
@@ -26,8 +35,9 @@ function Notification({
         {location.pathname === "/login" && "Login successful ✔"}
         {location.pathname === `/profile/${userId}` &&
           passUpdate === false &&
-          "Profile updated successful ✔"}
-        {passUpdate === true && "Password updated successful ✔"}
+          "Profile updated successfully ✔"}
+        {passUpdate === true && "Password updated successfully ✔"}
+        {location.pathname === `/product/${userId}` && "Added to wish list successfully ✔"}
       </h1>
     </div>
   );
