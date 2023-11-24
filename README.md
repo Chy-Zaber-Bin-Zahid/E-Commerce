@@ -1,3 +1,34 @@
+## Project Overview and guideline
+
+[Top](#project-overview-and-guideline)  
+[Functional Requirements](#functional-requirements)  
+[!Important](#important-instructions)
+
+## Project Setup
+
+1. Clone github repository on your local machine
+
+```
+git clone <repo link>
+```
+
+2. Initially you won't see the `node_modules` folder. Next thing you need to do after cloning the repo,  
+   Go to the `server` folder and run
+
+```bash
+npm i
+```
+
+It'll install all the dependencies and package needed inside the node_modules.
+Do the same for `client` folder.
+
+> Once done, you're ready to start working. 
+
+## Important Instructions
+1. Do not work on `main` branch.
+2. Work only on your particular-dev branch or feature branch. i.e `zaber`, `ahnaf`, `ahad`, `apu`
+3. Once a feature or portion is done (working), add `Pull Request` in github for review.
+
 ## Functional Requirements
 
 ### 1. User Registration
@@ -41,3 +72,5 @@
 - Admin can add, modify, and delete products.
 - Capability to ban customer accounts.
 - Access to view and respond to user inquiries, providing 24/7 customer support.
+
+[Top](#project-overview-and-guideline)

@@ -6,13 +6,11 @@ const wishListSchema = new Schema(
       type: String,
       required: [true, "User id is required!"],
       trim: true,
- 
     },
     productId: {
       type: String,
       required: [true, "Product id is required!"],
       trim: true,
-
     },
     image: {
       type: String,
