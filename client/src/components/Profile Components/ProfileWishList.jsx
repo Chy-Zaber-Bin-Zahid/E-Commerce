@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 function ProfileWishList() {
   const { userId } = useParams();
@@ -58,7 +58,9 @@ function ProfileWishList() {
       {wishList.length !== 0 ? (
         wishList.map((wish) => (
           <>
-            <div className="border flex justify-between items-center px-4 py-2 rounded shadow-sm shadow-gray-300 hover:shadow-gray-500 hover:shadow-md transition-all duration-300">
+            <Link 
+            to={`/product/${wish.productId}`}
+            className="border flex justify-between items-center px-4 py-2 rounded shadow-sm shadow-gray-300 hover:shadow-gray-500 hover:shadow-md transition-all duration-300">
               <div
                 className="flex justify-start gap-4 items-center"
                 key={wish._id}
@@ -79,7 +81,7 @@ function ProfileWishList() {
                 src="/images/delete.png"
                 alt="Delete"
               />
-            </div>
+            </Link>
           </>
         ))
       ) : !wishEmpty ? (
