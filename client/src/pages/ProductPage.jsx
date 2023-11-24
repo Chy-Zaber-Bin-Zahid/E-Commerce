@@ -1,4 +1,4 @@
-import ProductDetails from "../components/Product Components/ProductDetails";
+import ProductShowDetails from "../components/Product Components/ProductShowDetails";
 import Navbar from "../components/navbar";
 import Footer from "../components/Footer";
 import Notification from "../components/Notification";
@@ -10,7 +10,7 @@ function ProductPage({ logged, setLogged, accountId }) {
   return (
     <div>
       <Navbar setLogged={setLogged} logged={logged} accountId={accountId} />
-      <ProductDetails accountId={accountId} setWishListNotification={setWishListNotification}/>
+      <ProductShowDetails accountId={accountId} logged={logged} setWishListNotification={setWishListNotification}/>
       <Notification wishListNotification={wishListNotification} setWishListNotification={setWishListNotification} />
       <Footer />
     </div>
