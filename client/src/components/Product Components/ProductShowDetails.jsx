@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import ProductDetailsDescription from "./ProductDescription";
 import ProductIncrement from "./ProductIncrement";
 
-function ProductDetails({ accountId, setWishListNotification, logged }) {
+function ProductDetails({ accountId, setWishListNotification, logged, setCartNumber }) {
   const { userId } = useParams();
   const [productDetails, setProductDetails] = useState([]);
   const [checkLog, setCheckLog] = useState(false);
@@ -59,7 +59,7 @@ function ProductDetails({ accountId, setWishListNotification, logged }) {
               accountId={accountId}
               userId={userId}
             />
-            <ProductIncrement productDetails={productDetails} accountId={accountId} logged={logged} />
+            <ProductIncrement productDetails={productDetails} accountId={accountId} logged={logged} setCartNumber={setCartNumber} />
           </div>
         </>
       )}

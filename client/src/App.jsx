@@ -13,6 +13,7 @@ function App() {
   const [cartSlider, setCartSlider] = useState(false);
   const [logged, setLogged] = useState(false);
   const [accountId, setAccountId] = useState("");
+  const [cartNumber, setCartNumber] = useState(0);
 
   const handelCartSlider = () => {
     setCartSlider(!cartSlider);
@@ -30,6 +31,7 @@ function App() {
                 logged={logged}
                 accountId={accountId}
                 setAccountId={setAccountId}
+                setCartNumber={setCartNumber}
               />
             }
           />
@@ -40,13 +42,20 @@ function App() {
                 setLogged={setLogged}
                 logged={logged}
                 setAccountId={setAccountId}
+                setCartNumber={setCartNumber}
               />
             }
           />
           <Route path="register" element={<Register />} />
           <Route
             path="profile/:userId"
-            element={<Profile setLogged={setLogged} logged={logged} />}
+            element={
+              <Profile
+                setLogged={setLogged}
+                logged={logged}
+                setCartNumber={setCartNumber}
+              />
+            }
           />
           <Route
             path="/product/:userId"
@@ -55,14 +64,20 @@ function App() {
                 setLogged={setLogged}
                 logged={logged}
                 accountId={accountId}
+                setCartNumber={setCartNumber}
               />
             }
           />
           <Route path="*" element={<PageNotFound logged={logged} />} />
         </Routes>
       </BrowserRouter>
-      <Cart handelCartSlider={handelCartSlider} />
-      <CartSlider handelCartSlider={handelCartSlider} cartSlider={cartSlider} />
+      <Cart handelCartSlider={handelCartSlider} cartNumber={cartNumber} />
+      <CartSlider
+        handelCartSlider={handelCartSlider}
+        cartSlider={cartSlider}
+        accountId={accountId}
+        logged={logged}
+      />
     </div>
   );
 }

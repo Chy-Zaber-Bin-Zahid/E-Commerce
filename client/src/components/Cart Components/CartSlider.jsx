@@ -1,6 +1,7 @@
+import CartItem from "./CartItem";
 import CartTotal from "./CartTotal";
 
-function CartSlider({ cartSlider, handelCartSlider }) {
+function CartSlider({ cartSlider, handelCartSlider, accountId, logged }) {
   return (
     <div
       className={`${
@@ -19,10 +20,8 @@ function CartSlider({ cartSlider, handelCartSlider }) {
         </h1>
       </div>
       <div className="flex justify-center items-center flex-col  h-[calc(100vh-56px)]">
-        <div className="w-full h-full">
-          <h3 className="text-center py-6">Your shopping cart is empty!</h3>
-        </div>
-        <CartTotal />
+          <CartItem accountId={accountId} cartSlider={cartSlider} logged={logged} />
+          <CartTotal />
       </div>
     </div>
   );
