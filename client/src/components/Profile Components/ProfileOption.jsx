@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function ProfileOption({ setLogged, setSlider, setSliderOpen }) {
+function ProfileOption({ setLogged, setSlider, setSliderOpen, setCartNumber }) {
   const list = [
     {
       id: 1,
@@ -44,6 +44,7 @@ function ProfileOption({ setLogged, setSlider, setSliderOpen }) {
   const handleLogged = (path) => {
     if (path === "login") {
       setLogged(false);
+      setCartNumber(0);
     }
   };
 
@@ -55,13 +56,13 @@ function ProfileOption({ setLogged, setSlider, setSliderOpen }) {
         setSliderOpen("edit");
       } else if (id === 2) {
         setSliderOpen("change");
+      } else if (id === 3) {
+        setSliderOpen("order");
+      } else if (id === 4) {
+        setSliderOpen("wish");
+      } else {
+        setSliderOpen("payment");
       }
-    } else if (id === 3) {
-      setSliderOpen("order");
-    } else if (id === 4) {
-      setSliderOpen("wish");
-    } else {
-      setSliderOpen("payment");
     }
   };
 

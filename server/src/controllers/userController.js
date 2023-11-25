@@ -1,6 +1,7 @@
 const createError = require("http-errors");
 const bcrypt = require("bcrypt");
 const User = require("../models/userModel");
+const Cart = require("../models/cartModel");
 const { successResponse } = require("./responseController");
 const mongoose = require("mongoose");
 const { findUserById } = require("../services/findUserById");
@@ -77,6 +78,24 @@ const logUser = async (req, res, next) => {
     if (!isPasswordValid) {
       return res.status(400).json({
         error: "Wrong password",
+      });
+    }
+
+    //find all cart from user
+    let sum = 0;
+    const cartNumber = await Cart.find({ userId: existingUser._id });
+    if (cartNumber) {
+      const store = cartNumber.map((item) => Number(item.total));
+      sum = store.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue;
+      }, 0);
+      return successResponse(res, {
+        statusCode: 200,
+        message: "user logged in successfully",
+        payload: {
+          user: existingUser,
+          sum,
+        },
       });
     }
 

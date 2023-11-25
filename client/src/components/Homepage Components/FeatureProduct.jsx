@@ -35,7 +35,7 @@ function FeatureProduct() {
               featureProduct.map((product) => (
                 <Link
                   to={`/product/${product._id}`}
-                  className="bg-white p-4 flex flex-col gap-4 rounded shadow-lg cursor-pointer hover:bg-slate-100"
+                  className="bg-white p-4 flex flex-col gap-4 rounded shadow-lg cursor-pointer transition-transform transform-gpu hover:scale-105"
                   key={product._id}
                 >
                   <img
