@@ -3,7 +3,12 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import ProductDetails from "./ProductShowDetails";
 
-function ProductIncrement({ productDetails, logged, accountId }) {
+function ProductIncrement({
+  productDetails,
+  logged,
+  accountId,
+  setCartNumber,
+}) {
   const [number, setNumber] = useState(1);
   const [cartLog, setCartLog] = useState(false);
   const { userId } = useParams();
@@ -27,6 +32,8 @@ function ProductIncrement({ productDetails, logged, accountId }) {
           `http://localhost:3001/api/user/cart/${userId}`,
           { title, image, price, number, accountId }
         );
+        const cartNumber = result.data.payload.cart;
+        setCartNumber(cartNumber)
       } catch (err) {
         console.log(err);
       }

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function ProfileOption({ setLogged, setSlider, setSliderOpen }) {
+function ProfileOption({ setLogged, setSlider, setSliderOpen, setCartNumber }) {
   const list = [
     {
       id: 1,
@@ -44,6 +44,7 @@ function ProfileOption({ setLogged, setSlider, setSliderOpen }) {
   const handleLogged = (path) => {
     if (path === "login") {
       setLogged(false);
+      setCartNumber(0);
     }
   };
 

@@ -7,6 +7,7 @@ function LoginRegister({
   setLogNotification,
   setLogged,
   setAccountId,
+  setCartNumber,
 }) {
   const location = useLocation();
 
@@ -92,6 +93,10 @@ function LoginRegister({
           "http://localhost:3001/api/user/login",
           { email, password }
         );
+
+        if (result.data.payload.sum) {
+          setCartNumber(result.data.payload.sum);
+        }
 
         setLogNotification(true);
         setAccountId(result.data.payload.user._id);
