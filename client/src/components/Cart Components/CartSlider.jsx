@@ -1,7 +1,13 @@
 import CartItem from "./CartItem";
 import CartTotal from "./CartTotal";
 
-function CartSlider({ cartSlider, handelCartSlider, accountId, logged }) {
+function CartSlider({
+  cartSlider,
+  handelCartSlider,
+  accountId,
+  logged,
+  cartBounce,
+}) {
   return (
     <div
       className={`${
@@ -20,8 +26,13 @@ function CartSlider({ cartSlider, handelCartSlider, accountId, logged }) {
         </h1>
       </div>
       <div className="flex justify-center items-center flex-col  h-[calc(100vh-56px)]">
-          <CartItem accountId={accountId} cartSlider={cartSlider} logged={logged} />
-          <CartTotal />
+        <CartItem
+          accountId={accountId}
+          cartSlider={cartSlider}
+          logged={logged}
+          cartBounce={cartBounce}
+        />
+        <CartTotal />
       </div>
     </div>
   );

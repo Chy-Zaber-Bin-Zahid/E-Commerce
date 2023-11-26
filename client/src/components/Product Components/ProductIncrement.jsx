@@ -8,6 +8,7 @@ function ProductIncrement({
   logged,
   accountId,
   setCartNumber,
+  handleCartBounce,
 }) {
   const [number, setNumber] = useState(1);
   const [cartLog, setCartLog] = useState(false);
@@ -33,7 +34,8 @@ function ProductIncrement({
           { title, image, price, number, accountId }
         );
         const cartNumber = result.data.payload.cart;
-        setCartNumber(cartNumber)
+        setCartNumber(cartNumber);
+        handleCartBounce();
       } catch (err) {
         console.log(err);
       }
@@ -41,6 +43,7 @@ function ProductIncrement({
       setCartLog(true);
     }
   };
+  
   return (
     <>
       <form onSubmit={handleSubmit} className="w-50 flex mt-4 gap-5 mb-2">
