@@ -94,16 +94,17 @@ function LoginRegister({
           { email, password }
         );
 
-        if (result.data.payload.sum) {
-          setCartNumber(result.data.payload.sum);
-        }
-
         setLogNotification(true);
         setAccountId(result.data.payload.user._id);
         setTimeout(() => {
           navigate(`/profile/${result.data.payload.user._id}`);
           setLogged(true);
         }, 2000); // 2000 milliseconds (2 second)
+        setTimeout(()=>{
+          if (result.data.payload.sum) {
+            setCartNumber(result.data.payload.sum);
+          }
+        },2000)
       } catch (err) {
         const errorMessage = err.response.data.error;
         if (errorMessage === "User with this email does not exists") {

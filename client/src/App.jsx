@@ -14,6 +14,15 @@ function App() {
   const [logged, setLogged] = useState(false);
   const [accountId, setAccountId] = useState("");
   const [cartNumber, setCartNumber] = useState(0);
+  const [cartBounce, setCartBounce] = useState(false);
+
+  const handleCartBounce = () => {
+      setCartBounce(true);
+      setTimeout(() => {
+        setCartBounce(false);
+      }, 2500);
+
+  };
 
   const handelCartSlider = () => {
     setCartSlider(!cartSlider);
@@ -65,18 +74,24 @@ function App() {
                 logged={logged}
                 accountId={accountId}
                 setCartNumber={setCartNumber}
+                handleCartBounce={handleCartBounce}
               />
             }
           />
           <Route path="*" element={<PageNotFound logged={logged} />} />
         </Routes>
       </BrowserRouter>
-      <Cart handelCartSlider={handelCartSlider} cartNumber={cartNumber} />
+      <Cart
+        handelCartSlider={handelCartSlider}
+        cartNumber={cartNumber}
+        cartBounce={cartBounce}
+      />
       <CartSlider
         handelCartSlider={handelCartSlider}
         cartSlider={cartSlider}
         accountId={accountId}
         logged={logged}
+        cartBounce={cartBounce}
       />
     </div>
   );

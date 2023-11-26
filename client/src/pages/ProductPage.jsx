@@ -4,17 +4,29 @@ import Footer from "../components/Footer";
 import Notification from "../components/Notification";
 import { useState } from "react";
 
-function ProductPage({ logged, setLogged, accountId, setCartNumber }) {
+function ProductPage({
+  logged,
+  setLogged,
+  accountId,
+  setCartNumber,
+  handleCartBounce,
+}) {
   const [wishListNotification, setWishListNotification] = useState(false);
 
   return (
     <div>
-      <Navbar setLogged={setLogged} logged={logged} accountId={accountId} setCartNumber={setCartNumber} />
+      <Navbar
+        setLogged={setLogged}
+        logged={logged}
+        accountId={accountId}
+        setCartNumber={setCartNumber}
+      />
       <ProductShowDetails
         accountId={accountId}
         logged={logged}
         setWishListNotification={setWishListNotification}
         setCartNumber={setCartNumber}
+        handleCartBounce={handleCartBounce}
       />
       <Notification
         wishListNotification={wishListNotification}
