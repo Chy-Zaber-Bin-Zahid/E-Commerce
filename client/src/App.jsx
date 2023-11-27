@@ -92,6 +92,7 @@ function App() {
         accountId={accountId}
         logged={logged}
         cartBounce={cartBounce}
+        setCartNumber={setCartNumber}
       />
     </div>
   );
