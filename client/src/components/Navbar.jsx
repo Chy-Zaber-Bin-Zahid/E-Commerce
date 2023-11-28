@@ -2,7 +2,7 @@ import { NavLink, useLocation, useParams } from "react-router-dom";
 import Dropdown from "./Dropdown";
 import { useState } from "react";
 
-function Navbar({ setLogged, logged, accountId }) {
+function Navbar({ setLogged, logged, accountId, setCartNumber }) {
   let { userId } = useParams();
   const location = useLocation();
   if (!userId) {
@@ -25,6 +25,7 @@ function Navbar({ setLogged, logged, accountId }) {
   // Logout handle
   const handleLogged = () => {
     setLogged(false);
+    setCartNumber(0)
   };
 
   const windowSize = 1000;

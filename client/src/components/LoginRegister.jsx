@@ -7,6 +7,7 @@ function LoginRegister({
   setLogNotification,
   setLogged,
   setAccountId,
+  setCartNumber,
 }) {
   const location = useLocation();
 
@@ -99,6 +100,11 @@ function LoginRegister({
           navigate(`/profile/${result.data.payload.user._id}`);
           setLogged(true);
         }, 2000); // 2000 milliseconds (2 second)
+        setTimeout(()=>{
+          if (result.data.payload.sum) {
+            setCartNumber(result.data.payload.sum);
+          }
+        },2000)
       } catch (err) {
         const errorMessage = err.response.data.error;
         if (errorMessage === "User with this email does not exists") {

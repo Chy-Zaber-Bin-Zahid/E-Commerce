@@ -63,7 +63,7 @@ function Dropdown({ search }) {
       <div
         className={`bg-white absolute w-96 ${
           search ? "w-full top-14" : "top-9"
-        }  px-3 py-2 border-t ${dropdown === false ? "hidden" : "block"}`}
+        }  px-3 py-2 z-20 border-t ${dropdown === false ? "hidden" : "block"}`}
       >
         {inputValue.length !== 0 ? (
           inputValue.map((product) => (

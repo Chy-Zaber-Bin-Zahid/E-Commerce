@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import ProfileOption from "./ProfileOption";
 import ProfileSlider from "./ProfileSlider";
 
-function ProfileMain({ setLogged }) {
+function ProfileMain({ setLogged, setCartNumber }) {
   const [userInfo, setUserInfo] = useState({});
   const [slider, setSlider] = useState(false);
   const [sliderOpen, setSliderOpen] = useState("");
@@ -56,6 +56,7 @@ function ProfileMain({ setLogged }) {
           setSlider={setSlider}
           setSliderOpen={setSliderOpen}
           setLogged={setLogged}
+          setCartNumber={setCartNumber}
         />
       )}
     </div>
