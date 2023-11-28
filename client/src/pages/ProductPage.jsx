@@ -10,6 +10,7 @@ function ProductPage({
   accountId,
   setCartNumber,
   handleCartBounce,
+  setTotalCost
 }) {
   const [wishListNotification, setWishListNotification] = useState(false);
 
@@ -20,6 +21,7 @@ function ProductPage({
         logged={logged}
         accountId={accountId}
         setCartNumber={setCartNumber}
+        setTotalCost={setTotalCost}
       />
       <ProductShowDetails
         accountId={accountId}

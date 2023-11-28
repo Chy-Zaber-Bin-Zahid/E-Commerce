@@ -7,8 +7,9 @@ function CartItem({
   logged,
   cartBounce,
   setCartNumber,
+  cartItems,
+  setCartItems,
 }) {
-  const [cartItems, setCartItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -72,7 +73,6 @@ function CartItem({
       setCartNumber(0);
     } else {
       const totalValue = calculateTotal();
-      console.log(totalValue);
       setCartNumber(totalValue);
     }
   }, [cartItems]);

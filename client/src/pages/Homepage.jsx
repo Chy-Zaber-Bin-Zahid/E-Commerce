@@ -3,7 +3,13 @@ import FeatureProduct from "../components/Homepage Components/FeatureProduct";
 import Literature from "../components/Homepage Components/Literature";
 import Navbar from "../components/navbar";
 
-function Homepage({ logged, setLogged, accountId, setAccountId, setCartNumber }) {
+function Homepage({
+  logged,
+  setLogged,
+  accountId,
+  setAccountId,
+  setCartNumber,
+}) {
   return (
     <div className="bg-gray-100 ">
       <Navbar

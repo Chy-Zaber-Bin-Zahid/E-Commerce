@@ -17,11 +17,10 @@ function App() {
   const [cartBounce, setCartBounce] = useState(false);
 
   const handleCartBounce = () => {
-      setCartBounce(true);
-      setTimeout(() => {
-        setCartBounce(false);
-      }, 2500);
-
+    setCartBounce(true);
+    setTimeout(() => {
+      setCartBounce(false);
+    }, 2500);
   };
 
   const handelCartSlider = () => {
@@ -51,7 +50,7 @@ function App() {
                 setLogged={setLogged}
                 logged={logged}
                 setAccountId={setAccountId}
-                setCartNumber={setCartNumber}
+  
               />
             }
           />

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import CartItem from "./CartItem";
 import CartTotal from "./CartTotal";
 
@@ -7,14 +8,15 @@ function CartSlider({
   accountId,
   logged,
   cartBounce,
-  setCartNumber
+  setCartNumber,
+  totalCost,
+  setTotalCost,
 }) {
+  const [cartItems, setCartItems] = useState([]);
   return (
     <div
       className={`${
-        cartSlider === false
-          ? "translate-x-full"
-          : "translate-x-0"
+        cartSlider === false ? "translate-x-full" : "translate-x-0"
       } w-96 fixed shadow-xl shadow-gray-500 top-0 h-screen right-0 bg-white duration-300 max-[500px]:w-full z-20`}
     >
       <div className="flex justify-between items-center bg-sky-950 px-4 py-3 ">
@@ -33,8 +35,16 @@ function CartSlider({
           logged={logged}
           cartBounce={cartBounce}
           setCartNumber={setCartNumber}
+          cartItems={cartItems}
+          setCartItems={setCartItems}
         />
-        <CartTotal />
+        <CartTotal
+          logged={logged}
+          accountId={accountId}
+          cartItems={cartItems}
+          totalCost={totalCost}
+          setTotalCost={setTotalCost}
+        />
       </div>
     </div>
   );
