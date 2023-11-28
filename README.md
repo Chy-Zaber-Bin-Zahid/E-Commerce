@@ -16,7 +16,7 @@ git clone <repo link>
    Go to the `server` folder and run
 
 ```bash
-npm i
+npm install
 ```
 
 It'll install all the dependencies and package needed inside the node_modules.
