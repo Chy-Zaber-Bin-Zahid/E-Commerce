@@ -11,6 +11,7 @@ function CartSlider({
   setCartNumber,
   totalCost,
   setTotalCost,
+  payCheck
 }) {
   const [cartItems, setCartItems] = useState([]);
   return (
@@ -37,6 +38,7 @@ function CartSlider({
           setCartNumber={setCartNumber}
           cartItems={cartItems}
           setCartItems={setCartItems}
+          payCheck={payCheck}
         />
         <CartTotal
           logged={logged}
@@ -44,6 +46,7 @@ function CartSlider({
           cartItems={cartItems}
           totalCost={totalCost}
           setTotalCost={setTotalCost}
+          handelCartSlider={handelCartSlider}
         />
       </div>
     </div>

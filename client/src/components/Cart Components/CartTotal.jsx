@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-function CartTotal({ logged, accountId, cartItems }) {
+function CartTotal({ logged, accountId, cartItems, handelCartSlider }) {
   const [totalCost, setTotalCost] = useState(0);
 
   useEffect(() => {
@@ -49,9 +50,13 @@ function CartTotal({ logged, accountId, cartItems }) {
         <h1 className="font-semibold">{logged ? `${totalCost}Tk` : "0Tk"}</h1>
       </div>
       {logged && totalCost !== 0 && (
-        <button className="p-3 w-full text-white bg-orange-600 hover:bg-orange-700 cursor-pointer  transition-all duration-300 flex justify-center items-center font-semibold">
-          Check Out
-        </button>
+        <Link
+          to={`/payment/${accountId}`}
+          onClick={handelCartSlider}
+          className="p-3 w-full text-white bg-orange-600 hover:bg-orange-700 cursor-pointer  transition-all duration-300 flex justify-center items-center font-semibold"
+        >
+          Checkout
+        </Link>
       )}
     </div>
   );

@@ -108,7 +108,7 @@ const cartItem = async (req, res, next) => {
   }
 };
 
-// get all cart items
+// Delete all cart items
 const cartItemDelete = async (req, res, next) => {
   try {
     const cartId = req.params.id;

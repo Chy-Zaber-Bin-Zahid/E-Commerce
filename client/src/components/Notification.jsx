@@ -8,6 +8,7 @@ function Notification({
   passUpdate = false,
   wishListNotification = false,
   setWishListNotification,
+  paymentNotification = false,
 }) {
   const location = useLocation();
   const { userId } = useParams();
@@ -21,9 +22,17 @@ function Notification({
     }, 2000);
   }
 
+  if (paymentNotification) {
+    setTimeout(() => {
+      setWishListNotification(false);
+    }, 2000);
+  }
+
   return (
     <div
-      className={`
+      className={` ${
+        paymentNotification === true ? "translate-x-0" : "-translate-x-96"
+      } 
       ${upNotification === true ? "translate-x-0" : "-translate-x-96"} ${
         regNotification === true ? "translate-x-0" : "-translate-x-96"
       } ${logNotification === true ? "translate-x-0" : "-translate-x-96"} ${
@@ -37,7 +46,10 @@ function Notification({
           passUpdate === false &&
           "Profile updated successfully ✔"}
         {passUpdate === true && "Password updated successfully ✔"}
-        {location.pathname === `/product/${userId}` && "Added to wish list successfully ✔"}
+        {location.pathname === `/product/${userId}` &&
+          "Added to wish list successfully ✔"}
+        {location.pathname === `/payment/${userId}` &&
+          "Payment successfully done ✔"}
       </h1>
     </div>
   );

@@ -9,9 +9,10 @@ function CartItem({
   setCartNumber,
   cartItems,
   setCartItems,
+  payCheck
 }) {
   const [isLoading, setIsLoading] = useState(true);
-
+  console.log(payCheck);
   useEffect(() => {
     const handelCartItems = async () => {
       if (logged) {
@@ -39,7 +40,7 @@ function CartItem({
     };
 
     handelCartItems();
-  }, [cartSlider, cartBounce, logged]);
+  }, [cartSlider, cartBounce, logged, payCheck]);
 
   // cart item remove
   const handelItemDelete = async (id) => {
