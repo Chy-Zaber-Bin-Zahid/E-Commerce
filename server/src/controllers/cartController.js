@@ -84,7 +84,7 @@ const cartItem = async (req, res, next) => {
     const accountId = req.params.id;
     // check if user has any item in cart db
     const allCartItems = await Cart.find({ userId: accountId }).exec();
-    console.log(allCartItems);
+
     if (allCartItems) {
       res.setHeader(
         "Cache-Control",
@@ -101,11 +101,70 @@ const cartItem = async (req, res, next) => {
         },
       });
     }
-    
+
     return res.status(404).json({ message: "No items found in the cart" });
   } catch (err) {
     next(err);
   }
 };
 
-module.exports = { cart, cartItem };
+// Delete all cart items
+const cartItemDelete = async (req, res, next) => {
+  try {
+    const cartId = req.params.id;
+
+    // Find the cart item by ID and delete it from the database
+    const deletedItem = await Cart.findByIdAndDelete(cartId);
+
+    if (deletedItem) {
+      // Item was deleted successfully
+      return res.status(200).json({
+        statusCode: 200,
+        message: "Cart item removed successfully",
+        payload: {
+          deletedItem,
+        },
+      });
+    } else {
+      // Item with the specified ID was not found
+      return res.status(404).json({
+        statusCode: 404,
+        message: "Cart item not found",
+      });
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+// get cart totals
+const cartTotal = async (req, res, next) => {
+  try {
+    const accountId = req.params.id;
+    // check if user has any item in cart db
+    const allCartItems = await Cart.find({ userId: accountId }).exec();
+
+    if (allCartItems) {
+      res.setHeader(
+        "Cache-Control",
+        "no-store, no-cache, must-revalidate, proxy-revalidate"
+      );
+      res.setHeader("Pragma", "no-cache");
+      res.setHeader("Expires", "0");
+
+      return successResponse(res, {
+        statusCode: 200,
+        message: "all cart items fetch successfully",
+        payload: {
+          allCartItems,
+        },
+      });
+    }
+
+    return res.status(404).json({ message: "No items found in the cart" });
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { cart, cartItem, cartItemDelete, cartTotal };

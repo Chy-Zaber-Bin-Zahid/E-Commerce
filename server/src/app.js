@@ -9,7 +9,8 @@ const { errorResponse } = require("./controllers/responseController");
 const cors = require("cors");
 const featureProductRouter = require("./routers/featureProductRouter");
 const wishListRouter = require("./routers/wishListRouter");
-const cartRoute = require("./routers/cartRoute");
+const cartRouter = require("./routers/cartRouter");
+const paymentRouter = require("./routers/paymentRouter");
 
 const app = express();
 
@@ -35,7 +36,8 @@ const isLoggedIn = (req, res, next) => {
 app.use("/api/user", userRouter);
 app.use("/api/user", featureProductRouter);
 app.use("/api/user", wishListRouter);
-app.use("/api/user", cartRoute);
+app.use("/api/user", cartRouter);
+app.use("/api/user", paymentRouter);
 
 // Client error handling
 app.use((req, res, next) => {
