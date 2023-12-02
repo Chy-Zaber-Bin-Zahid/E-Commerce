@@ -4,6 +4,7 @@ const Cart = require("../models/cartModel");
 const { successResponse } = require("./responseController");
 const mongoose = require("mongoose");
 const { findUserById } = require("../services/findUserById");
+const sendEmailWithNodeMail = require("./email");
 
 // payment details post to db
 const paymentDetails = async (req, res, next) => {
@@ -19,6 +20,24 @@ const paymentDetails = async (req, res, next) => {
       return res.status(400).json({
         error: "Telephone is less than 11",
       });
+    }
+
+    // Prepare email
+    const emailData = {
+      email: req.body.email,
+      subject: "Payment Successfully Done",
+      html: `
+      <h2>Hello ${req.body.name}!</h2>
+      <p>Your order was successfully done. Please wait for your product to arrive or pickup your product from near by Smart Tech store. Thank you!</p>
+      `,
+    };
+
+    // Send email with nodemailer
+    try {
+      await sendEmailWithNodeMail(emailData);
+    } catch (err) {
+      next(createError(500, "Failed to send mail!"));
+      return;
     }
 
     const userId = req.params.id;

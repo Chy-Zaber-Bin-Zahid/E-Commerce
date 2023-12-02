@@ -8,6 +8,7 @@ function LoginRegister({
   setLogged,
   setAccountId,
   setCartNumber,
+  setAdminCheck,
 }) {
   const location = useLocation();
 
@@ -95,16 +96,22 @@ function LoginRegister({
         );
 
         setLogNotification(true);
-        setAccountId(result.data.payload.user._id);
+        const data = result.data.payload.user;
+        setAccountId(data._id);
+        if (data.isAdmin) {
+          setAdminCheck(true);
+        } else {
+          setAdminCheck(false);
+        }
         setTimeout(() => {
           navigate(`/profile/${result.data.payload.user._id}`);
           setLogged(true);
         }, 2000); // 2000 milliseconds (2 second)
-        setTimeout(()=>{
+        setTimeout(() => {
           if (result.data.payload.sum) {
             setCartNumber(result.data.payload.sum);
           }
-        },2000)
+        }, 2000);
       } catch (err) {
         const errorMessage = err.response.data.error;
         if (errorMessage === "User with this email does not exists") {

@@ -16,7 +16,7 @@ function Payment({
   setCartNumber,
   setTotalCost,
   setPayCheck,
-  payCheck
+  payCheck,
 }) {
   const [delivery, setDelivery] = useState("home");
   const [payment, setPayment] = useState("cash");
@@ -28,11 +28,13 @@ function Payment({
   const [telLength, setTelLength] = useState(false);
   const [totalCost, setTotalCostCart] = useState(0);
   const [paymentNotification, setPaymentNotification] = useState(false);
+  const [paymentStatus, setPaymentStatus] = useState(false);
 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setPaymentStatus(true);
     try {
       const result = await axios.post(
         `http://localhost:3001/api/user/payment/${accountId}`,
@@ -47,7 +49,7 @@ function Payment({
           totalCost,
         }
       );
-      console.log(result.data.payload.payment);
+      setPaymentStatus(false);
       setPaymentNotification(true);
       setPayCheck(!payCheck);
       setTimeout(() => {
@@ -100,10 +102,15 @@ function Payment({
         </div>
         <div className="mt-4 text-right border-t pt-4">
           <button
+            disabled={paymentStatus ? true : false}
             type="submit"
-            className="text-center w-40 bg-indigo-700 rounded py-2.5 text-white font-semibold hover:bg-indigo-800 transition-all duration-300"
+            className={`text-center ${
+              paymentStatus ? "w-58 px-6" : "w-40"
+            } bg-indigo-700 rounded py-2.5 text-white font-semibold hover:bg-indigo-800 transition-all duration-300`}
           >
-            Confirm Order
+            {paymentStatus
+              ? "Payment Process Ongoing Please wait..."
+              : "Confirm Order"}
           </button>
         </div>
       </form>
