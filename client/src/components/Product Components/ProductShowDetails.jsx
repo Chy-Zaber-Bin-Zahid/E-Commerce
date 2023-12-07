@@ -4,12 +4,18 @@ import { useEffect, useState } from "react";
 import ProductDetailsDescription from "./ProductDescription";
 import ProductIncrement from "./ProductIncrement";
 
-function ProductDetails({ accountId, setWishListNotification, logged, setCartNumber }) {
+function ProductDetails({
+  accountId,
+  setWishListNotification,
+  logged,
+  setCartNumber,
+  handleCartBounce,
+}) {
   const { userId } = useParams();
   const [productDetails, setProductDetails] = useState([]);
   const [checkLog, setCheckLog] = useState(false);
   const [wishListExist, setWishListExist] = useState(false);
-  
+
   useEffect(() => {
     const handelFeatureProductFetch = async () => {
       try {
@@ -59,7 +65,13 @@ function ProductDetails({ accountId, setWishListNotification, logged, setCartNum
               accountId={accountId}
               userId={userId}
             />
-            <ProductIncrement productDetails={productDetails} accountId={accountId} logged={logged} setCartNumber={setCartNumber} />
+            <ProductIncrement
+              productDetails={productDetails}
+              accountId={accountId}
+              logged={logged}
+              setCartNumber={setCartNumber}
+              handleCartBounce={handleCartBounce}
+            />
           </div>
         </>
       )}

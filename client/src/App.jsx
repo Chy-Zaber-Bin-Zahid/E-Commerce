@@ -8,12 +8,23 @@ import CartSlider from "./components/Cart Components/CartSlider";
 import { useState } from "react";
 import Profile from "./pages/Profile";
 import ProductPage from "./pages/ProductPage";
+import Payment from "./pages/Payment";
 
 function App() {
   const [cartSlider, setCartSlider] = useState(false);
   const [logged, setLogged] = useState(false);
   const [accountId, setAccountId] = useState("");
   const [cartNumber, setCartNumber] = useState(0);
+  const [cartBounce, setCartBounce] = useState(false);
+  const [payCheck, setPayCheck] = useState(false);
+  const [adminCheck, setAdminCheck] = useState(false);
+
+  const handleCartBounce = () => {
+    setCartBounce(true);
+    setTimeout(() => {
+      setCartBounce(false);
+    }, 2500);
+  };
 
   const handelCartSlider = () => {
     setCartSlider(!cartSlider);
@@ -42,7 +53,7 @@ function App() {
                 setLogged={setLogged}
                 logged={logged}
                 setAccountId={setAccountId}
-                setCartNumber={setCartNumber}
+                setAdminCheck={setAdminCheck}
               />
             }
           />
@@ -54,6 +65,7 @@ function App() {
                 setLogged={setLogged}
                 logged={logged}
                 setCartNumber={setCartNumber}
+                adminCheck={adminCheck}
               />
             }
           />
@@ -65,19 +77,41 @@ function App() {
                 logged={logged}
                 accountId={accountId}
                 setCartNumber={setCartNumber}
+                handleCartBounce={handleCartBounce}
+              />
+            }
+          />
+          <Route
+            path="/payment/:userId"
+            element={
+              <Payment
+                setLogged={setLogged}
+                logged={logged}
+                accountId={accountId}
+                setAccountId={setAccountId}
+                setCartNumber={setCartNumber}
+                setPayCheck={setPayCheck}
+                payCheck={payCheck}
               />
             }
           />
           <Route path="*" element={<PageNotFound logged={logged} />} />
         </Routes>
+        <Cart
+          handelCartSlider={handelCartSlider}
+          cartNumber={cartNumber}
+          cartBounce={cartBounce}
+        />
+        <CartSlider
+          handelCartSlider={handelCartSlider}
+          cartSlider={cartSlider}
+          accountId={accountId}
+          logged={logged}
+          cartBounce={cartBounce}
+          setCartNumber={setCartNumber}
+          payCheck={payCheck}
+        />
       </BrowserRouter>
-      <Cart handelCartSlider={handelCartSlider} cartNumber={cartNumber} />
-      <CartSlider
-        handelCartSlider={handelCartSlider}
-        cartSlider={cartSlider}
-        accountId={accountId}
-        logged={logged}
-      />
     </div>
   );
 }
