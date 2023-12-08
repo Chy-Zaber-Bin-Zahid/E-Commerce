@@ -4,7 +4,14 @@ import { useParams } from "react-router-dom";
 import ProfileOption from "./ProfileOption";
 import ProfileSlider from "./ProfileSlider";
 
-function ProfileMain({ setLogged, setCartNumber, adminCheck }) {
+function ProfileMain({
+  setLogged,
+  setCartNumber,
+  adminCheck,
+  setPayment,
+  payment,
+  setAccountId,
+}) {
   const [userInfo, setUserInfo] = useState({});
   const [slider, setSlider] = useState(false);
   const [sliderOpen, setSliderOpen] = useState("");
@@ -52,6 +59,8 @@ function ProfileMain({ setLogged, setCartNumber, adminCheck }) {
           sliderOpen={sliderOpen}
           setUserInfo={setUserInfo}
           adminCheck={adminCheck}
+          setPayment={setPayment}
+          payment={payment}
         />
       ) : (
         <ProfileOption
@@ -60,6 +69,7 @@ function ProfileMain({ setLogged, setCartNumber, adminCheck }) {
           setLogged={setLogged}
           setCartNumber={setCartNumber}
           adminCheck={adminCheck}
+          setAccountId={setAccountId}
         />
       )}
     </div>

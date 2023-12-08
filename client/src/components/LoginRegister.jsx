@@ -20,6 +20,7 @@ function LoginRegister({
   const [exist, setExist] = useState(false);
   const [passCheck, setPassCheck] = useState(false);
   const [telLength, setTelLength] = useState(false);
+  const [isBanned, setIsBanned] = useState(false);
 
   // Length check
   const handleInputChange = (event, setFunc, length = 0) => {
@@ -95,23 +96,28 @@ function LoginRegister({
           { email, password }
         );
 
-        setLogNotification(true);
         const data = result.data.payload.user;
-        setAccountId(data._id);
-        if (data.isAdmin) {
-          setAdminCheck(true);
-        } else {
-          setAdminCheck(false);
-        }
-        setTimeout(() => {
-          navigate(`/profile/${result.data.payload.user._id}`);
-          setLogged(true);
-        }, 2000); // 2000 milliseconds (2 second)
-        setTimeout(() => {
-          if (result.data.payload.sum) {
-            setCartNumber(result.data.payload.sum);
+        if (data.isBanned === false) {
+          setLogNotification(true);
+          setAccountId(data._id);
+          if (data.isAdmin) {
+            setAdminCheck(true);
+          } else {
+            setAdminCheck(false);
           }
-        }, 2000);
+          setTimeout(() => {
+            navigate(`/profile/${result.data.payload.user._id}`);
+            setLogged(true);
+          }, 2000); // 2000 milliseconds (2 second)
+          setTimeout(() => {
+            if (result.data.payload.sum) {
+              setCartNumber(result.data.payload.sum);
+            }
+          }, 2000);
+          setIsBanned(false);
+        } else {
+          setIsBanned(true);
+        }
       } catch (err) {
         const errorMessage = err.response.data.error;
         if (errorMessage === "User with this email does not exists") {
@@ -132,6 +138,11 @@ function LoginRegister({
               ? "Account Login"
               : "Register Account"}
           </h1>
+          {isBanned && (
+            <h1 className="border-2 border-red-600 text-red-600 p-2 rounded mt-4 text-center font-semibold">
+              This Account Is Banned!
+            </h1>
+          )}
           {location.pathname === "/register" && (
             <div className="mt-4 flex flex-col">
               <label htmlFor="">

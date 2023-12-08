@@ -6,6 +6,7 @@ function ProfileOption({
   setSliderOpen,
   setCartNumber,
   adminCheck,
+  setAccountId
 }) {
   // Admin
   const adminList = [
@@ -29,18 +30,30 @@ function ProfileOption({
     },
     {
       id: 4,
+      image: "wish.png",
+      title: "Wish List",
+      path: "wishList",
+    },
+    {
+      id: 5,
+      image: "payment.png",
+      title: "Your Transactions",
+      path: "paymentHistory",
+    },
+    {
+      id: 6,
       image: "users.png",
       title: "Users Management",
       path: "users",
     },
     {
-      id: 5,
-      image: "authority.png",
-      title: "Authority Management",
-      path: "authority",
+      id: 7,
+      image: "product.png",
+      title: "Product Management",
+      path: "product",
     },
     {
-      id: 6,
+      id: 8,
       image: "logout.png",
       title: "Logout",
       path: "login",
@@ -91,14 +104,15 @@ function ProfileOption({
     if (path === "login") {
       setLogged(false);
       setCartNumber(0);
+      // setAccountId("");
     }
   };
 
   // Profile Slider handle
   const handleSlider = (id) => {
-    if (id !== 6) {
-      setSlider(true);
-      if (adminCheck) {
+    setSlider(true);
+    if (adminCheck) {
+      if (id !== 8) {
         if (id === 1) {
           setSliderOpen("edit");
         } else if (id === 2) {
@@ -106,11 +120,17 @@ function ProfileOption({
         } else if (id === 3) {
           setSliderOpen("order");
         } else if (id === 4) {
+          setSliderOpen("wish");
+        } else if (id === 5) {
+          setSliderOpen("payment");
+        } else if (id === 6) {
           setSliderOpen("users");
         } else {
-          setSliderOpen("authority");
+          setSliderOpen("product");
         }
-      } else {
+      }
+    } else {
+      if (id !== 6) {
         if (id === 1) {
           setSliderOpen("edit");
         } else if (id === 2) {
@@ -134,11 +154,11 @@ function ProfileOption({
   return (
     <>
       {adminCheck ? (
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-4 gap-4">
           {adminList.map((menu) => (
             <Link
               onClick={() => handleBoth(menu.path, menu.id)}
-              to={menu.id === 6 ? `/${menu.path}` : undefined}
+              to={menu.id === 8 ? `/${menu.path}` : undefined}
               key={menu.id}
               className="flex gap-1 flex-col justify-center items-center border rounded py-16 shadow-md hover:cursor-pointer hover:border-sky-800 transition-all duration-300"
             >
