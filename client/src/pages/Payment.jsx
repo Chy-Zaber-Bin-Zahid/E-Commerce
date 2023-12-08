@@ -17,9 +17,10 @@ function Payment({
   setTotalCost,
   setPayCheck,
   payCheck,
+  payment,
+  setPayment,
 }) {
   const [delivery, setDelivery] = useState("home");
-  const [payment, setPayment] = useState("cash");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [telephone, setTelephone] = useState("");
@@ -91,7 +92,7 @@ function Payment({
             telLength={telLength}
             setTelLength={setTelLength}
           />
-          <PaymentMethod setPayment={setPayment} />
+          <PaymentMethod setPayment={setPayment} payment={payment} />
           <DeliverMethod setDelivery={setDelivery} />
           <OrderShow
             accountId={accountId}

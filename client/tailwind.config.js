@@ -6,6 +6,7 @@ export default {
       maxWidth: {
         xs: "110px",
       },
+      
     },
   },
   plugins: [],

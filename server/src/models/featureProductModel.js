@@ -28,33 +28,7 @@ const featureProductSchema = new Schema(
       ],
       default: [], // Default value for reviews as an empty array
     },
-    keyFeature: {
-      model: {
-        type: String,
-        required: [true, "FeatureProduct model is required!"],
-        trim: true,
-      },
-      resolution: {
-        type: String,
-        required: [true, "FeatureProduct resolution is required!"],
-        trim: true,
-      },
-      display: {
-        type: String,
-        required: [true, "FeatureProduct display is required!"],
-        trim: true,
-      },
-      ports: {
-        type: String,
-        required: [true, "FeatureProduct ports is required!"],
-        trim: true,
-      },
-      features: {
-        type: String,
-        required: [true, "FeatureProduct features is required!"],
-        trim: true,
-      },
-    },
+    keyFeature: Schema.Types.Mixed,
   },
   { timestamps: true, collection: "feature-product" }
 );

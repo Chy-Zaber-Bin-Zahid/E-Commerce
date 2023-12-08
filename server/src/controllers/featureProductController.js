@@ -45,7 +45,7 @@ const productDetails = async (req, res, next) => {
     );
     res.setHeader("Pragma", "no-cache");
     res.setHeader("Expires", "0");
- 
+
     return successResponse(res, {
       statusCode: 200,
       message: "Feature product fetched successfully",
@@ -58,4 +58,33 @@ const productDetails = async (req, res, next) => {
   }
 };
 
-module.exports = { featureProduct, productDetails };
+// Delete product
+const productDelete = async (req, res, next) => {
+  try {
+    const productId = req.params.id;
+
+    // Find the cart item by ID and delete it from the database
+    const deletedItem = await FeatureProduct.findByIdAndDelete(productId);
+
+    if (deletedItem) {
+      // Item was deleted successfully
+      return res.status(200).json({
+        statusCode: 200,
+        message: "Product removed successfully",
+        payload: {
+          deletedItem,
+        },
+      });
+    } else {
+      // Item with the specified ID was not found
+      return res.status(404).json({
+        statusCode: 404,
+        message: "Product item not found",
+      });
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { featureProduct, productDetails, productDelete };
