@@ -17,6 +17,7 @@ function App() {
   const [cartNumber, setCartNumber] = useState(0);
   const [cartBounce, setCartBounce] = useState(false);
   const [payCheck, setPayCheck] = useState(false);
+  const [adminCheck, setAdminCheck] = useState(false);
 
   const handleCartBounce = () => {
     setCartBounce(true);
@@ -52,6 +53,7 @@ function App() {
                 setLogged={setLogged}
                 logged={logged}
                 setAccountId={setAccountId}
+                setAdminCheck={setAdminCheck}
               />
             }
           />
@@ -63,6 +65,7 @@ function App() {
                 setLogged={setLogged}
                 logged={logged}
                 setCartNumber={setCartNumber}
+                adminCheck={adminCheck}
               />
             }
           />

@@ -220,4 +220,101 @@ const changePassUser = async (req, res, next) => {
   }
 };
 
-module.exports = { regUser, logUser, getUserById, changeUser, changePassUser };
+// Payment update
+const paymentUpdate = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const user = await findUserById(id);
+    console.log(req.body.payment);
+    user.payment = req.body.payment;
+
+    await user.save();
+
+    return successResponse(res, {
+      statusCode: 200,
+      message: "payment updated successfully",
+      payload: {
+        user,
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+// Payment update
+const paymentGet = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const user = await findUserById(id);
+
+    return successResponse(res, {
+      statusCode: 200,
+      message: "payment status got successfully",
+      payload: {
+        user,
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+// Fetch all user
+const getAllUser = async (req, res, next) => {
+  try {
+    const user = await User.find().exec();
+    return successResponse(res, {
+      statusCode: 200,
+      message: "all user fetch successfully",
+      payload: {
+        user,
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+// User status update
+const statusUpdate = async (req, res, next) => {
+  try {
+    const id = req.body.userId;
+    const status = req.body.status;
+    const user = await findUserById(id);
+
+    if (status === "Ban") {
+      user.isBanned = true;
+    } else if (status === "Unban") {
+      user.isBanned = false;
+    } else if (status === "Unauthorize") {
+      user.isAdmin = false;
+    } else {
+      user.isAdmin = true;
+    }
+
+    await user.save();
+
+    return successResponse(res, {
+      statusCode: 200,
+      message: "payment updated successfully",
+      payload: {
+        user,
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = {
+  regUser,
+  logUser,
+  getUserById,
+  changeUser,
+  changePassUser,
+  paymentUpdate,
+  paymentGet,
+  getAllUser,
+  statusUpdate,
+};
