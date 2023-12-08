@@ -7,10 +7,12 @@ function CartItem({
   logged,
   cartBounce,
   setCartNumber,
+  cartItems,
+  setCartItems,
+  payCheck
 }) {
-  const [cartItems, setCartItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  console.log(payCheck);
   useEffect(() => {
     const handelCartItems = async () => {
       if (logged) {
@@ -38,7 +40,7 @@ function CartItem({
     };
 
     handelCartItems();
-  }, [cartSlider, cartBounce, logged]);
+  }, [cartSlider, cartBounce, logged, payCheck]);
 
   // cart item remove
   const handelItemDelete = async (id) => {
@@ -72,7 +74,6 @@ function CartItem({
       setCartNumber(0);
     } else {
       const totalValue = calculateTotal();
-      console.log(totalValue);
       setCartNumber(totalValue);
     }
   }, [cartItems]);

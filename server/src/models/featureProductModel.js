@@ -17,6 +17,17 @@ const featureProductSchema = new Schema(
       required: [true, "FeatureProduct price is required!"],
       trim: true,
     },
+    reviews: {
+      type: [
+        {
+          user: String,
+          comment: String,
+          rating: Number,
+          date: { type: Date, default: Date.now },
+        },
+      ],
+      default: [], // Default value for reviews as an empty array
+    },
     keyFeature: {
       model: {
         type: String,

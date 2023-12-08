@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import ProfileOption from "./ProfileOption";
 import ProfileSlider from "./ProfileSlider";
 
-function ProfileMain({ setLogged, setCartNumber }) {
+function ProfileMain({ setLogged, setCartNumber, adminCheck }) {
   const [userInfo, setUserInfo] = useState({});
   const [slider, setSlider] = useState(false);
   const [sliderOpen, setSliderOpen] = useState("");
@@ -15,7 +15,8 @@ function ProfileMain({ setLogged, setCartNumber }) {
         const response = await axios.get(
           `http://localhost:3001/api/user/profile/${userId}`
         );
-        setUserInfo(response.data.payload.user);
+        const data = response.data.payload.user;
+        setUserInfo(data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -50,6 +51,7 @@ function ProfileMain({ setLogged, setCartNumber }) {
           setSliderOpen={setSliderOpen}
           sliderOpen={sliderOpen}
           setUserInfo={setUserInfo}
+          adminCheck={adminCheck}
         />
       ) : (
         <ProfileOption
@@ -57,6 +59,7 @@ function ProfileMain({ setLogged, setCartNumber }) {
           setSliderOpen={setSliderOpen}
           setLogged={setLogged}
           setCartNumber={setCartNumber}
+          adminCheck={adminCheck}
         />
       )}
     </div>

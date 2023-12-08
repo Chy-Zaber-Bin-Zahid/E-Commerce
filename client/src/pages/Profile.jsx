@@ -2,7 +2,7 @@ import Footer from "../components/Footer";
 import ProfileMain from "../components/Profile Components/ProfileMain";
 import Navbar from "../components/navbar";
 
-function Profile({ setLogged, logged, setCartNumber }) {
+function Profile({ setLogged, logged, setCartNumber, adminCheck }) {
   return (
     <div>
       <Navbar
@@ -10,7 +10,11 @@ function Profile({ setLogged, logged, setCartNumber }) {
         setLogged={setLogged}
         setCartNumber={setCartNumber}
       />
-      <ProfileMain setLogged={setLogged} setCartNumber={setCartNumber} />
+      <ProfileMain
+        setLogged={setLogged}
+        setCartNumber={setCartNumber}
+        adminCheck={adminCheck}
+      />
       <Footer />
     </div>
   );
