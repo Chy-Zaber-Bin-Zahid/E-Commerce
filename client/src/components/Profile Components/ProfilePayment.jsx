@@ -1,7 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
-function PaymentMethod({ setPayment, payment }) {
+function ProfilePayment({ setPayment, payment }) {
+  const { userId } = useParams();
+  const [paymentUpdate, setPaymentUpdate] = useState(false);
   const store = [
     {
       id: "cash",
@@ -34,6 +37,7 @@ function PaymentMethod({ setPayment, payment }) {
   ];
 
   const handelPayment = (pay) => {
+    setPaymentUpdate(true);
     if (pay === "cash") {
       setPayment("cash");
     } else if (pay === "bkash") {
@@ -54,41 +58,49 @@ function PaymentMethod({ setPayment, payment }) {
   // update payment method
   useEffect(() => {
     const handleUpdateProduct = async () => {
-      try {
-        const result = await axios.get(
-          `http://localhost:3001/api/user/payment/${userId}`,
-          {
-            params: {
-              fields: ["payment"],
-            },
-          }
-        );
-        // Handle successful update
-        const data = result.data.payload.user.payment;
-        setPayment(() => {
-          return data;
-        });
-      } catch (err) {
-        // Handle error
-        console.error("Error updating product:", err);
+      if (paymentUpdate) {
+        try {
+          const result = await axios.patch(
+            `http://localhost:3001/api/user/payment/${userId}`,
+            { payment }
+          );
+          // Handle successful update
+          const data = result.data.payload.user.payment;
+          console.log("if", data);
+        } catch (err) {
+          // Handle error
+          console.error("Error updating product:", err);
+        }
+      } else {
+        try {
+          const result = await axios.get(
+            `http://localhost:3001/api/user/payment/${userId}`,
+            {
+              params: {
+                fields: ["payment"],
+              },
+            }
+          );
+          // Handle successful update
+          const data = result.data.payload.user.payment;
+          setPayment(() => {
+            return data;
+          });
+        } catch (err) {
+          // Handle error
+          console.error("Error updating product:", err);
+        }
       }
     };
     handleUpdateProduct();
   }, [payment]);
 
   return (
-    <div className="rounded border p-6 bg-white">
-      <h1 className="font-semibold text-xl pb-4 border-b">
-        <span className="px-3 py-1 bg-red-100 rounded-full text-red-500  text-lg mr-4">
-          2
-        </span>
-        Payment Method
-      </h1>
+    <div className="flex flex-col gap-4 px-4 py-8">
       <div>
-        <label className="py-2 inline-block" htmlFor="">
-          Select a payment method
-        </label>
-        <br />
+        <h1 className="text-2xl text-blue-700 mb-3">
+          Choose Your Transactions Method
+        </h1>
         {store.map((item) => (
           <React.Fragment key={item.id}>
             <input
@@ -109,4 +121,4 @@ function PaymentMethod({ setPayment, payment }) {
   );
 }
 
-export default PaymentMethod;
+export default ProfilePayment;

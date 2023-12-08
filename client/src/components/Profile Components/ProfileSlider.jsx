@@ -2,8 +2,19 @@ import { useState } from "react";
 import ProfileEdit from "./ProfileEdit";
 import ProfilePassChange from "./ProfilePassChange";
 import ProfileWishList from "./ProfileWishList";
+import ProfilePayment from "./ProfilePayment";
+import ProfileOrder from "./ProfileOrder";
+import ProfileBanUnban from "./ProfileBanUnban";
+import ProfileProductManage from "./ProfileProductManage";
 
-function ProfileSlider({ sliderOpen, setSliderOpen, setUserInfo, adminCheck }) {
+function ProfileSlider({
+  sliderOpen,
+  setSliderOpen,
+  setUserInfo,
+  adminCheck,
+  setPayment,
+  payment,
+}) {
   const [upNotification, setUpNotification] = useState(false);
 
   // admin
@@ -28,15 +39,27 @@ function ProfileSlider({ sliderOpen, setSliderOpen, setUserInfo, adminCheck }) {
     },
     {
       id: 4,
+      image: "wish.png",
+      title: "Saved List",
+      path: "wish",
+    },
+    {
+      id: 5,
+      image: "payment.png",
+      title: "Your Transactions",
+      path: "payment",
+    },
+    {
+      id: 6,
       image: "users.png",
       title: "Users",
       path: "users",
     },
     {
-      id: 5,
-      image: "authority.png",
-      title: "Authority",
-      path: "authority",
+      id: 7,
+      image: "product.png",
+      title: "Product Management",
+      path: "product",
     },
   ];
 
@@ -77,7 +100,6 @@ function ProfileSlider({ sliderOpen, setSliderOpen, setUserInfo, adminCheck }) {
   // Product Slide handle
   const handleSlide = (path) => {
     setSliderOpen(path);
-    console.log(path);
   };
 
   return (
@@ -110,6 +132,13 @@ function ProfileSlider({ sliderOpen, setSliderOpen, setUserInfo, adminCheck }) {
               upNotification={upNotification}
             />
           )}
+          {sliderOpen === "wish" && <ProfileWishList />}
+          {sliderOpen === "payment" && (
+            <ProfilePayment setPayment={setPayment} payment={payment} />
+          )}
+          {sliderOpen === "order" && <ProfileOrder adminCheck={adminCheck} />}
+          {sliderOpen === "users" && <ProfileBanUnban />}
+          {sliderOpen === "product" && <ProfileProductManage />}
         </div>
       ) : (
         <div>
@@ -140,6 +169,10 @@ function ProfileSlider({ sliderOpen, setSliderOpen, setUserInfo, adminCheck }) {
             />
           )}
           {sliderOpen === "wish" && <ProfileWishList />}
+          {sliderOpen === "payment" && (
+            <ProfilePayment setPayment={setPayment} payment={payment} />
+          )}
+          {sliderOpen === "order" && <ProfileOrder adminCheck={adminCheck} />}
         </div>
       )}
     </>

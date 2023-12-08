@@ -58,22 +58,33 @@ const productDetails = async (req, res, next) => {
   }
 };
 
-// Add product
-const productAdd = async (req, res, next) => {
+// Delete product
+const productDelete = async (req, res, next) => {
+  try {
+    const productId = req.params.id;
 
-  console.log(req.body.name);
-  // try {
+    // Find the cart item by ID and delete it from the database
+    const deletedItem = await FeatureProduct.findByIdAndDelete(productId);
 
-  //   return successResponse(res, {
-  //     statusCode: 200,
-  //     message: "Feature product fetched successfully",
-  //     payload: {
-  //       product,
-  //     },
-  //   });
-  // } catch (err) {
-  //   next(err);
-  // }
+    if (deletedItem) {
+      // Item was deleted successfully
+      return res.status(200).json({
+        statusCode: 200,
+        message: "Product removed successfully",
+        payload: {
+          deletedItem,
+        },
+      });
+    } else {
+      // Item with the specified ID was not found
+      return res.status(404).json({
+        statusCode: 404,
+        message: "Product item not found",
+      });
+    }
+  } catch (err) {
+    next(err);
+  }
 };
 
-module.exports = { featureProduct, productDetails, productAdd };
+module.exports = { featureProduct, productDetails, productDelete };
