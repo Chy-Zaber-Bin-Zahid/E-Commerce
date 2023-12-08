@@ -45,7 +45,7 @@ const productDetails = async (req, res, next) => {
     );
     res.setHeader("Pragma", "no-cache");
     res.setHeader("Expires", "0");
- 
+
     return successResponse(res, {
       statusCode: 200,
       message: "Feature product fetched successfully",
@@ -58,4 +58,22 @@ const productDetails = async (req, res, next) => {
   }
 };
 
-module.exports = { featureProduct, productDetails };
+// Add product
+const productAdd = async (req, res, next) => {
+
+  console.log(req.body.name);
+  // try {
+
+  //   return successResponse(res, {
+  //     statusCode: 200,
+  //     message: "Feature product fetched successfully",
+  //     payload: {
+  //       product,
+  //     },
+  //   });
+  // } catch (err) {
+  //   next(err);
+  // }
+};
+
+module.exports = { featureProduct, productDetails, productAdd };
