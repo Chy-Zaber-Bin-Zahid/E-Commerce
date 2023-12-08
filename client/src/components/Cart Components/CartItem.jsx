@@ -12,7 +12,7 @@ function CartItem({
   payCheck
 }) {
   const [isLoading, setIsLoading] = useState(true);
-  console.log(payCheck);
+ 
   useEffect(() => {
     const handelCartItems = async () => {
       if (logged) {

@@ -47,6 +47,10 @@ const userSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    payment: {
+      type: String,
+      default: "cash",
+    },
   },
   { timestamps: true }
 );

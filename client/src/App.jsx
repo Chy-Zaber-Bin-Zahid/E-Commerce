@@ -5,7 +5,7 @@ import Homepage from "./pages/Homepage";
 import PageNotFound from "./pages/PageNotFound";
 import Cart from "./components/Cart Components/Cart";
 import CartSlider from "./components/Cart Components/CartSlider";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Profile from "./pages/Profile";
 import ProductPage from "./pages/ProductPage";
 import Payment from "./pages/Payment";
@@ -18,6 +18,14 @@ function App() {
   const [cartBounce, setCartBounce] = useState(false);
   const [payCheck, setPayCheck] = useState(false);
   const [adminCheck, setAdminCheck] = useState(false);
+  const [payment, setPayment] = useState("");
+
+  useEffect(() => {
+    if (!logged) {
+      setAccountId("");
+    }
+    console.log(accountId);
+  }, [logged]);
 
   const handleCartBounce = () => {
     setCartBounce(true);
@@ -66,6 +74,8 @@ function App() {
                 logged={logged}
                 setCartNumber={setCartNumber}
                 adminCheck={adminCheck}
+                setPayment={setPayment}
+                payment={payment}
               />
             }
           />
@@ -92,6 +102,8 @@ function App() {
                 setCartNumber={setCartNumber}
                 setPayCheck={setPayCheck}
                 payCheck={payCheck}
+                payment={payment}
+                setPayment={setPayment}
               />
             }
           />
