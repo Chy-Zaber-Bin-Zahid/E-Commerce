@@ -58,7 +58,6 @@ const productDetails = async (req, res, next) => {
   }
 };
 
-<<<<<<< HEAD
 // Delete product
 const productDelete = async (req, res, next) => {
   try {
@@ -66,7 +65,7 @@ const productDelete = async (req, res, next) => {
 
     // Find the cart item by ID and delete it from the database
     const deletedItem = await FeatureProduct.findByIdAndDelete(productId);
-    console.log(deletedItem);
+
     if (deletedItem) {
       // Item was deleted successfully
       return res.status(200).json({
@@ -89,24 +88,3 @@ const productDelete = async (req, res, next) => {
 };
 
 module.exports = { featureProduct, productDetails, productDelete };
-=======
-// Add product
-const productAdd = async (req, res, next) => {
-
-  console.log(req.body.name);
-  // try {
-
-  //   return successResponse(res, {
-  //     statusCode: 200,
-  //     message: "Feature product fetched successfully",
-  //     payload: {
-  //       product,
-  //     },
-  //   });
-  // } catch (err) {
-  //   next(err);
-  // }
-};
-
-module.exports = { featureProduct, productDetails, productAdd };
->>>>>>> 7d478a564480f9f44a393ccb7524e8b1dac40c89

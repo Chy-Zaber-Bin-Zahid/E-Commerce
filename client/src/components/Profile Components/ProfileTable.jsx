@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useEffect, useState } from "react";
 
 function ProfileTable({
   userInfo,
@@ -7,18 +8,26 @@ function ProfileTable({
   table = "",
   featureProduct = [],
   setFeatureProduct,
+  addClicked,
 }) {
+  const [checkAdd, setCheckAdd] = useState(false);
+
+  useEffect(() => {
+    setCheckAdd(!checkAdd);
+    console.log(addClicked, checkAdd);
+  }, [addClicked]);
+
   const handelDelete = async (id) => {
     try {
       const result = await axios.delete(
         `http://localhost:3001/api/user/product/delete/${id}`
       );
-      const deletedItemId = result.data.payload.deletedItem;
+      const deletedItemId = result.data.payload.deletedItem._id;
       const updatedProducts = featureProduct.filter(
         (item) => item._id !== deletedItemId
       );
-      console.log(deletedItemId, updatedProducts, featureProduct);
-      setFeatureProduct(updatedProducts);
+      console.log(updatedProducts, deletedItemId);
+      setFeatureProduct(() => updatedProducts);
     } catch (err) {
       const errorMessage = err.response.data.error;
       console.log(errorMessage);

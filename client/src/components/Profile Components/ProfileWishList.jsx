@@ -58,9 +58,7 @@ function ProfileWishList() {
       {wishList.length !== 0 ? (
         wishList.map((wish) => (
           <>
-            <Link 
-            to={`/product/${wish.productId}`}
-            className="border flex justify-between items-center px-4 py-2 rounded shadow-sm shadow-gray-300 hover:shadow-gray-500 hover:shadow-md transition-all duration-300">
+            <div className="border flex justify-between items-center px-4 py-2 rounded shadow-sm shadow-gray-300 hover:shadow-gray-500 hover:shadow-md transition-all duration-300">
               <div
                 className="flex justify-start gap-4 items-center"
                 key={wish._id}
@@ -71,7 +69,12 @@ function ProfileWishList() {
                   className="w-16"
                 />
                 <div>
-                  <h1 className="font-semibold">{wish.title}</h1>
+                  <Link
+                    to={`/product/${wish.productId}`}
+                    className="font-semibold hover:text-blue-700 transition-all duration-300 "
+                  >
+                    {wish.title}
+                  </Link>
                   <h1 className="text-red-600">{wish.price}Tk</h1>
                 </div>
               </div>
@@ -81,7 +84,7 @@ function ProfileWishList() {
                 src="/images/delete.png"
                 alt="Delete"
               />
-            </Link>
+            </div>
           </>
         ))
       ) : !wishEmpty ? (

@@ -8,6 +8,7 @@ function ProfileProductManage() {
   const table = "product management";
   const [storeValue, setStoreValue] = useState("");
   const [featureProduct, setFeatureProduct] = useState([]);
+  const [addClicked, setAddClicked] = useState(false);
 
   const handleChange = (e) => {
     setStoreValue(e.target.value);
@@ -52,14 +53,14 @@ function ProfileProductManage() {
         >
           <h1>Add</h1>
         </div>
-        <div
+        {/* <div
           onClick={() => setActive("edit")}
           className={`flex gap-1 px-2 transition-all duration-200 cursor-pointer  py-2 font-semibold rounded justify-center w-full ${
             active === "edit" && "bg-orange-400 text-white"
           } `}
         >
           <h1>Edit</h1>
-        </div>
+        </div> */}
         <div
           onClick={() => setActive("delete")}
           className={`flex gap-1 px-2 transition-all duration-200 cursor-pointer  py-2 font-semibold rounded justify-center w-full ${
@@ -69,7 +70,9 @@ function ProfileProductManage() {
           <h1>Delete</h1>
         </div>
       </div>
-      {active === "add" && <ProfileAdd />}
+      {active === "add" && (
+        <ProfileAdd setAddClicked={setAddClicked} addClicked={addClicked} />
+      )}
       {active === "delete" && (
         <div>
           <input
@@ -84,6 +87,7 @@ function ProfileProductManage() {
             storeValue={storeValue}
             featureProduct={featureProduct}
             setFeatureProduct={setFeatureProduct}
+            addClicked={addClicked}
           />
         </div>
       )}

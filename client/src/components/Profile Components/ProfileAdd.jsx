@@ -1,12 +1,14 @@
 import { useState } from "react";
 import axios from "axios";
+import Notification from "../Notification";
 
-function ProfileAdd() {
+function ProfileAdd({ setAddClicked, addClicked }) {
   const [price, setPrice] = useState(false);
   const [file, setFile] = useState();
   const [title, setTitle] = useState("");
   const [priceInput, setPriceInput] = useState("");
   const [features, setFeatures] = useState([{ name: "", description: "" }]);
+  const [addNotification, setAddNotification] = useState(false);
 
   const addInput = () => {
     setFeatures([...features, { name: "", description: "" }]);
@@ -48,6 +50,8 @@ function ProfileAdd() {
         "http://localhost:3001/api/user/upload",
         formData
       );
+      setAddClicked(!addClicked);
+      setAddNotification(true);
       // Handle the result
     } catch (err) {
       // Handle errors
@@ -165,6 +169,10 @@ function ProfileAdd() {
           Add
         </button>
       </div>
+      <Notification
+        addNotification={addNotification}
+        setAddNotification={setAddNotification}
+      />
     </form>
   );
 }
