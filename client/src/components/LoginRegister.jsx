@@ -63,7 +63,7 @@ function LoginRegister({
     if (location.pathname === "/register") {
       try {
         const result = await axios.post(
-          "http://localhost:3001/api/user/register",
+          "https://smart-tech-ec8z.onrender.com/api/user/register",
           { name, email, password, telephone }
         );
         // console.log(result.data);
@@ -92,7 +92,7 @@ function LoginRegister({
     else {
       try {
         const result = await axios.post(
-          "http://localhost:3001/api/user/login",
+          "https://smart-tech-ec8z.onrender.com/api/user/login",
           { email, password }
         );
 
