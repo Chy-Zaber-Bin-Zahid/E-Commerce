@@ -18,7 +18,7 @@ function CartItem({
       if (logged) {
         try {
           const result = await axios.get(
-            `http://localhost:3001/api/user/cart/${accountId}`,
+            `https://smart-tech-ec8z.onrender.com/api/user/cart/${accountId}`,
             {
               params: {
                 fields: ["image", "title", "price"],
@@ -46,7 +46,7 @@ function CartItem({
   const handelItemDelete = async (id) => {
     try {
       const result = await axios.delete(
-        `http://localhost:3001/api/user/cart/${id}`
+        `https://smart-tech-ec8z.onrender.com/api/user/cart/${id}`
       );
       const deletedItemId = result.data.payload.deletedItem._id;
       const updatedCartItems = cartItems.filter(
@@ -88,7 +88,7 @@ function CartItem({
             <div className="flex gap-3  px-4 pt-4 ">
               <img
                 className="w-12"
-                src={`http://localhost:3001/images/products/${item.image}`}
+                src={`https://smart-tech-ec8z.onrender.com/images/products/${item.image}`}
                 alt={item.title}
               />
               <h1 className="text-sm">{item.title}</h1>
