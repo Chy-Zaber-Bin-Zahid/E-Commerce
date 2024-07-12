@@ -10,7 +10,7 @@ function CartTotal({ logged, accountId, cartItems, handelCartSlider }) {
       if (logged) {
         try {
           const result = await axios.get(
-            `http://localhost:3001/api/user/cart/total/${accountId}`,
+            `https://smart-tech-ec8z.onrender.com/api/user/cart/total/${accountId}`,
             {
               params: {
                 fields: ["costTotal"],
