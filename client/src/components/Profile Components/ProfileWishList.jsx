@@ -10,7 +10,7 @@ function ProfileWishList() {
   const handleDeleteWish = async (id) => {
     try {
       const result = await axios.post(
-        `http://localhost:3001/api/user/wishListDelete/${id}`,
+        `https://smart-tech-ec8z.onrender.com/api/user/wishListDelete/${id}`,
         {
           userId,
         }
@@ -32,7 +32,7 @@ function ProfileWishList() {
     const handleWishList = async () => {
       try {
         const result = await axios.get(
-          `http://localhost:3001/api/user/wishList/${userId}`,
+          `https://smart-tech-ec8z.onrender.com/api/user/wishList/${userId}`,
           {
             params: {
               fields: ["image", "title", "price"],
@@ -64,7 +64,7 @@ function ProfileWishList() {
                 key={wish._id}
               >
                 <img
-                  src={`http://localhost:3001/images/products/${wish.image}`}
+                  src={`https://smart-tech-ec8z.onrender.com/images/products/${wish.image}`}
                   alt={wish.title}
                   className="w-16"
                 />
