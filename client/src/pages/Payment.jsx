@@ -38,7 +38,7 @@ function Payment({
     setPaymentStatus(true);
     try {
       const result = await axios.post(
-        `http://localhost:3001/api/user/payment/${accountId}`,
+        `https://smart-tech-ec8z.onrender.com/api/user/payment/${accountId}`,
         {
           name,
           email,
