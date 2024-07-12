@@ -15,7 +15,7 @@ function ProductDetailsDescription({
     try {
       const { title, image, price } = productDetails;
       const result = await axios.post(
-        `http://localhost:3001/api/user/wishList/${accountId}`,
+        `https://smart-tech-ec8z.onrender.com/api/user/wishList/${accountId}`,
         { title, image, price, userId }
       );
       setWishListNotification(true);
