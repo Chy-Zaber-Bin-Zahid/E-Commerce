@@ -20,7 +20,7 @@ function ProfileTable({
   const handelDelete = async (id) => {
     try {
       const result = await axios.delete(
-        `http://localhost:3001/api/user/product/delete/${id}`
+        `https://smart-tech-ec8z.onrender.com/api/user/product/delete/${id}`
       );
       const deletedItemId = result.data.payload.deletedItem._id;
       const updatedProducts = featureProduct.filter(
