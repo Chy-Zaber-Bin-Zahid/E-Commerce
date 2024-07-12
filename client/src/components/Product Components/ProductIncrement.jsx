@@ -30,7 +30,7 @@ function ProductIncrement({
       const { title, image, price } = productDetails;
       try {
         const result = await axios.post(
-          `http://localhost:3001/api/user/cart/${userId}`,
+          `https://smart-tech-ec8z.onrender.com/api/user/cart/${userId}`,
           { title, image, price, number, accountId }
         );
         const cartNumber = result.data.payload.cart;
