@@ -9,7 +9,7 @@ function FeatureProduct() {
     const handelFeatureProductFetch = async () => {
       try {
         const result = await axios.get(
-          "http://localhost:3001/api/user/product",
+          "https://smart-tech-ec8z.onrender.com/api/user/product",
           {
             params: {
               fields: ["image", "title", "price"],
@@ -40,7 +40,7 @@ function FeatureProduct() {
                 >
                   <img
                     className="border-b-2 w-full"
-                    src={`http://localhost:3001/images/products/${product.image}`}
+                    src={`https://smart-tech-ec8z.onrender.com/images/products/${product.image}`}
                     alt={product.title}
                   />
                   <div className="flex flex-col justify-between flex-grow">
