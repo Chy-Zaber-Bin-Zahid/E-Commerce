@@ -47,7 +47,7 @@ function ProfileAdd({ setAddClicked, addClicked }) {
     formData.append("features", JSON.stringify(features));
     try {
       const result = await axios.post(
-        "http://localhost:3001/api/user/upload",
+        "https://smart-tech-ec8z.onrender.com/api/user/upload",
         formData
       );
       setAddClicked(!addClicked);
