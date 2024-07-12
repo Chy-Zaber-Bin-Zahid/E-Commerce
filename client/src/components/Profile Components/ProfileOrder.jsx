@@ -12,7 +12,7 @@ function ProfileOrder({ adminCheck }) {
     const handleWishList = async () => {
       try {
         const result = await axios.get(
-          `http://localhost:3001/api/user/order/${userId}`,
+          `https://smart-tech-ec8z.onrender.com/api/user/order/${userId}`,
           {
             params: {
               fields: [
