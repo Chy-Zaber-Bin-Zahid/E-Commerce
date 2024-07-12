@@ -13,7 +13,7 @@ function OrderShow({
     const handelCartItems = async () => {
       try {
         const result = await axios.get(
-          `http://localhost:3001/api/user/cart/${accountId}`,
+          `https://smart-tech-ec8z.onrender.com/api/user/cart/${accountId}`,
           {
             params: {
               fields: ["title", "price", "total", "totalCost"],
