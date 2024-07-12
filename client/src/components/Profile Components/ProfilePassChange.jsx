@@ -18,7 +18,7 @@ function ProfilePassChange({ setUpNotification, upNotification }) {
     // Password Sent to Backend
     try {
       const result = await axios.post(
-        "http://localhost:3001/api/user/changePass",
+        "https://smart-tech-ec8z.onrender.com/api/user/changePass",
         {
           userId,
           oldPassword,
