@@ -61,7 +61,7 @@ function ProfilePayment({ setPayment, payment }) {
       if (paymentUpdate) {
         try {
           const result = await axios.patch(
-            `http://localhost:3001/api/user/payment/${userId}`,
+            `https://smart-tech-ec8z.onrender.com/api/user/payment/${userId}`,
             { payment }
           );
           // Handle successful update
@@ -74,7 +74,7 @@ function ProfilePayment({ setPayment, payment }) {
       } else {
         try {
           const result = await axios.get(
-            `http://localhost:3001/api/user/payment/${userId}`,
+            `https://smart-tech-ec8z.onrender.com/api/user/payment/${userId}`,
             {
               params: {
                 fields: ["payment"],
