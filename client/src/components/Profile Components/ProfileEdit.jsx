@@ -16,7 +16,7 @@ function ProfileEdit({ setUserInfo, upNotification, setUpNotification }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const result = await axios.post("http://localhost:3001/api/user/change", {
+      const result = await axios.post("https://smart-tech-ec8z.onrender.com/api/user/change", {
         email,
         name,
         telephone,
