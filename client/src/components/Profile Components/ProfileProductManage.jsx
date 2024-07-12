@@ -18,7 +18,7 @@ function ProfileProductManage() {
     const handelFeatureProductFetch = async () => {
       try {
         const result = await axios.get(
-          "http://localhost:3001/api/user/product",
+          "https://smart-tech-ec8z.onrender.com/api/user/product",
           {
             params: {
               fields: ["title", "_id"],
