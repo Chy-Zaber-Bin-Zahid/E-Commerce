@@ -15,7 +15,7 @@ function ProfileBanUnban() {
   useEffect(() => {
     const handelUserFetch = async () => {
       try {
-        const result = await axios.get("http://localhost:3001/api/user/all", {
+        const result = await axios.get("https://smart-tech-ec8z.onrender.com/api/user/all", {
           params: {
             fields: ["name", "email", "isAdmin", "isBanned"],
           },
@@ -43,7 +43,7 @@ function ProfileBanUnban() {
       if (status !== "") {
         try {
           const result = await axios.patch(
-            "http://localhost:3001/api/user/status",
+            "https://smart-tech-ec8z.onrender.com/api/user/status",
             { status, userId }
           );
           const updatedUser = result.data.payload.user;
