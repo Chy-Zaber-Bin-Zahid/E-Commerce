@@ -56,7 +56,7 @@ function PaymentMethod({ setPayment, payment }) {
     const handleUpdateProduct = async () => {
       try {
         const result = await axios.get(
-          `http://localhost:3001/api/user/payment/${userId}`,
+          `https://smart-tech-ec8z.onrender.com/api/user/payment/${userId}`,
           {
             params: {
               fields: ["payment"],
