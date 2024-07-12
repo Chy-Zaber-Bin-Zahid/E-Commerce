@@ -20,7 +20,7 @@ function ProfileMain({
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/api/user/profile/${userId}`
+          `https://smart-tech-ec8z.onrender.com/api/user/profile/${userId}`
         );
         const data = response.data.payload.user;
         setUserInfo(data);
