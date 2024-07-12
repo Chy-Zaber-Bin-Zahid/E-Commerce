@@ -23,7 +23,7 @@ function Dropdown({ search }) {
       // e.preventDefault();
       try {
         const result = await axios.get(
-          "http://localhost:3001/api/user/product",
+          "https://smart-tech-ec8z.onrender.com/api/user/product",
           {
             params: {
               fields: ["image", "title", "price"],
@@ -74,7 +74,7 @@ function Dropdown({ search }) {
             >
               <img
                 className="border-b-2 w-16"
-                src={`http://localhost:3001/images/products/${product.image}`}
+                src={`https://smart-tech-ec8z.onrender.com/images/products/${product.image}`}
                 alt={product.title}
               />
               <div>
