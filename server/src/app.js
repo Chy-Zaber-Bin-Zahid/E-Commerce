@@ -52,6 +52,14 @@ const isLoggedIn = (req, res, next) => {
   next();
 };
 
+// Root route
+app.get('/', (req, res) => {
+  res.send('Welcome to the API');
+});
+
+// Favicon route
+app.get('/favicon.ico', (req, res) => res.status(204));
+
 // Router
 app.use("/api/user", userRouter);
 app.use("/api/user", featureProductRouter);
